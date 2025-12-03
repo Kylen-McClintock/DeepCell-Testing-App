@@ -7,13 +7,14 @@ export default function manifest(): MetadataRoute.Manifest {
         description: 'Track your sleep and health metrics with DeepCell.',
         start_url: '/',
         display: 'standalone',
-        background_color: '#0b0e1a',
-        theme_color: '#0b0e1a',
+        background_color: '#000000',
+        theme_color: '#000000',
         icons: [
             {
                 src: '/icon.png',
                 sizes: 'any',
                 type: 'image/png',
+                purpose: 'maskable any' as any,
             },
         ],
     };
