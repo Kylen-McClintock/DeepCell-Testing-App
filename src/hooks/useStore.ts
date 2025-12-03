@@ -11,73 +11,85 @@ export function useStore() {
     // Load initial state
     useEffect(() => {
         const load = async () => {
-            const { data: { session } } = await supabase.auth.getSession();
+            try {
+                const { data: { session } } = await supabase.auth.getSession();
 
-            if (session) {
-                // Load from Supabase
-                const { data: profile } = await supabase
-                    .from('profiles')
-                    .select('*')
-                    .eq('id', session.user.id)
-                    .single();
+                if (session) {
+                    // Load from Supabase
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('*')
+                        .eq('id', session.user.id)
+                        .single();
 
-                const { data: logs } = await supabase
-                    .from('daily_logs')
-                    .select('*')
-                    .eq('user_id', session.user.id);
+                    const { data: logs } = await supabase
+                        .from('daily_logs')
+                        .select('*')
+                        .eq('user_id', session.user.id);
 
-                if (profile || (logs && logs.length > 0)) {
-                    const daily: Record<string, DailyLog> = {};
-                    logs?.forEach((log: any) => {
-                        daily[log.date] = {
-                            date: log.date,
-                            tookDose: log.took_dose,
-                            doseAmount: log.dose_amount,
-                            sliders: log.sliders,
-                            wakeUps: log.wake_ups,
-                            wearables: log.wearables,
-                            metrics: log.metrics,
-                            notes: log.notes
+                    if (profile || (logs && logs.length > 0)) {
+                        const daily: Record<string, DailyLog> = {};
+                        logs?.forEach((log: any) => {
+                            daily[log.date] = {
+                                date: log.date,
+                                tookDose: log.took_dose,
+                                doseAmount: log.dose_amount,
+                                sliders: log.sliders,
+                                wakeUps: log.wake_ups,
+                                wearables: log.wearables,
+                                metrics: log.metrics,
+                                notes: log.notes
+                            };
+                        });
+
+                        const plan: Plan = {
+                            ...defaultState.plan,
+                            ...(profile ? {
+                                participantName: profile.participant_name,
+                                participantEmail: profile.participant_email,
+                                productName: profile.product_name,
+                                productVersion: profile.product_version,
+                                startDate: profile.start_date,
+                                baselineDays: profile.baseline_days,
+                                doseNotes: profile.dose_notes,
+                                defaultDose: profile.default_dose,
+                                mode: profile.mode,
+                                estimates: profile.estimates,
+                                reminders: profile.reminders
+                            } : {})
                         };
-                    });
 
-                    const plan: Plan = {
-                        ...defaultState.plan,
-                        ...(profile ? {
-                            participantName: profile.participant_name,
-                            participantEmail: profile.participant_email,
-                            productName: profile.product_name,
-                            productVersion: profile.product_version,
-                            startDate: profile.start_date,
-                            baselineDays: profile.baseline_days,
-                            doseNotes: profile.dose_notes,
-                            defaultDose: profile.default_dose,
-                            mode: profile.mode,
-                            estimates: profile.estimates,
-                            reminders: profile.reminders
-                        } : {})
-                    };
-
-                    setState({
-                        version: 4.3,
-                        plan,
-                        daily
-                    });
+                        setState({
+                            version: 4.3,
+                            plan,
+                            daily
+                        });
+                    } else {
+                        // Fallback to local storage if no cloud data found (first login?)
+                        const raw = localStorage.getItem(STORAGE_KEY);
+                        if (raw) {
+                            try {
+                                const obj = JSON.parse(raw);
+                                setState({ ...defaultState, ...obj });
+                            } catch (e) { }
+                        }
+                    }
                 } else {
-                    // Fallback to local storage if no cloud data found (first login?)
-                    // Or just use default state.
-                    // Let's check local storage just in case they were using it before auth implementation (unlikely in this flow but good practice)
+                    // No session, check local storage just in case
                     const raw = localStorage.getItem(STORAGE_KEY);
                     if (raw) {
                         try {
                             const obj = JSON.parse(raw);
                             setState({ ...defaultState, ...obj });
-                            // TODO: Maybe auto-upload local data to cloud here?
                         } catch (e) { }
                     }
                 }
+            } catch (err) {
+                console.error("Store load error:", err);
+                // alert("Error loading data: " + (err as any).message); // Optional: alert user
+            } finally {
+                setLoading(false);
             }
-            setLoading(false);
         };
         load();
     }, []);

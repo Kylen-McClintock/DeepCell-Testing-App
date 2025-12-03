@@ -29,8 +29,22 @@ export default function Layout({ children }: LayoutProps) {
         return () => subscription.unsubscribe();
     }, []);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (loading) {
+                alert("Loading is taking longer than expected. Please check your connection.");
+            }
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, [loading]);
+
     if (loading) {
-        return <div className="min-h-screen flex items-center justify-center bg-[#0b0e1a] text-[var(--muted)]">Loading...</div>;
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center bg-[#0b0e1a] text-[var(--muted)]">
+                <div>Loading...</div>
+                <div className="text-xs mt-2 opacity-50">Initializing Auth...</div>
+            </div>
+        );
     }
 
     if (!session) {
