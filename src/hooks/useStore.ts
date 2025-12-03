@@ -33,7 +33,7 @@ export function useStore() {
                             daily[log.date] = {
                                 date: log.date,
                                 tookDose: log.took_dose,
-                                doseAmount: log.dose_amount,
+                                doseAmount: log.dose_amount ? Number(log.dose_amount) : undefined,
                                 sliders: log.sliders,
                                 wakeUps: log.wake_ups,
                                 wearables: log.wearables,
@@ -52,7 +52,7 @@ export function useStore() {
                                 startDate: profile.start_date,
                                 baselineDays: profile.baseline_days,
                                 doseNotes: profile.dose_notes,
-                                defaultDose: profile.default_dose,
+                                defaultDose: profile.default_dose ? Number(profile.default_dose) : 3,
                                 mode: profile.mode,
                                 estimates: profile.estimates,
                                 reminders: profile.reminders
