@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LEVL DeepCell Tracker — v4.3</title>
+  <style>
+    :root{
+      --bg:#0b0e1a;
+      --panel:#13172d;
+      --accent:#7d5fff; /* DeepCell Purple */
+      --accent2:#5e9bff;
+      --text:#e4e7f5;
+      --muted:#7f88a9;
+      --ok:#47d16a;
+      --warn:#ffcc00;
+      --bad:#ff6b6b;
+      --card:#101325;
+      --btn-bg: #1b2144;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    header{
+      position:sticky;top:0;z-index:5;
+      background:linear-gradient(180deg, rgba(11,14,26,0.95), rgba(11,14,26,0.8));
+      backdrop-filter: blur(8px); border-bottom:1px solid #222748;
+    }
+    .wrap{max-width:800px;margin:0 auto;padding:16px}
+    h1{font-size:20px;margin:6px 0 8px 0;letter-spacing:.4px}
+    nav{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0}
+    nav button{background:var(--btn-bg);border:1px solid #2b3266;color:var(--text);padding:8px 12px;border-radius:12px;cursor:pointer}
+    nav button.active{background:linear-gradient(120deg,var(--accent2),var(--accent));color:#fff;border-color:transparent;font-weight:600}
+    main{padding:20px 0}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{background:var(--panel);border:1px solid #242a57;border-radius:18px;padding:20px}
+    .col-12{grid-column:span 12}.col-6{grid-column:span 6}
+    label{display:block;margin:10px 0 6px 0;color:var(--muted);font-size:13px}
+    input[type="text"],input[type="number"],input[type="date"],input[type="time"],textarea,select{
+      width:100%;padding:10px 12px;border-radius:12px;border:1px solid #2b3266;background:#0e1228;color:var(--text)
+    }
+    textarea{min-height:84px;resize:vertical}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .row > *{flex:1}
+    .btn{background:linear-gradient(120deg,#2b336b,#1b2144);border:1px solid #2b3266;color:var(--text);padding:10px 14px;border-radius:12px;cursor:pointer}
+    .btn.primary{background:linear-gradient(120deg,var(--accent2),var(--accent));color:#fff;border-color:transparent;font-weight:700}
+    .btn.warn{background:linear-gradient(120deg,#5b1c1c,#2a0e0e);border:1px solid #692727}
+    .small{font-size:12px;color:var(--muted)}
+    .kpi{display:flex;gap:16px;flex-wrap:wrap}
+    .kpi .tile{flex:1;min-width:140px;background:var(--card);border:1px solid #222748;border-radius:16px;padding:12px 14px}
+    .tile h3{margin:0;font-size:14px;color:var(--muted);font-weight:500}
+    .tile .num{font-size:24px;margin-top:6px;font-weight:800}
+    .slider-row{display:flex;align-items:center;gap:10px; margin-bottom: 8px;}
+    .slider-row input[type="range"]{flex:1}
+    .divider{height:1px;background:#222748;margin:18px 0}
+    
+    /* Chart Container */
+    #chartBox { position: relative; }
+    canvas,svg{width:100%;height:320px;background:#0e1228;border:1px solid #222748;border-radius:12px}
+    
+    /* Custom Tooltip */
+    .chart-tooltip {
+      position: absolute;
+      background: rgba(22, 27, 51, 0.95);
+      border: 1px solid #2b3266;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      transform: translate(-50%, -120%);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 10;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .chart-tooltip::after {
+      content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
+      border-width: 5px; border-style: solid; border-color: #2b3266 transparent transparent transparent;
+    }
+
+    .badge{padding:3px 8px;border-radius:8px;border:1px solid #2b3266;background:#0e1228;font-size:12px;margin-left:8px}
+    .hero{
+      background: radial-gradient(1200px 280px at 10% -10%, rgba(94,155,255,.15), transparent),
+                  radial-gradient(900px 260px at 90% -20%, rgba(125,95,255,.15), transparent);
+      border-radius:18px;border:1px solid #242a57;padding:14px 16px;margin-bottom:16px
+    }
+    
+    /* Expandable Styling */
+    summary{cursor:pointer; outline:none; font-weight:600; margin-bottom:8px; padding: 8px 12px; background:#1b2144; border-radius:10px; color:var(--accent2); display:flex; align-items:center; justify-content:space-between}
+    summary:hover{background:#222955}
+    summary::after { content: '+'; font-size: 16px; font-weight:bold; }
+    details[open] summary::after { content: '−'; }
+    .details-body { padding: 12px; background: #0e1228; border-top:1px solid #2b3266; }
+    .drop-btn { width:100%; border:2px dashed #2b3266; color:var(--muted); padding:10px; border-radius:8px; background:transparent; cursor:pointer; }
+    .drop-btn:hover { border-color:var(--accent2); color:var(--text); }
+
+    /* Mode Selection Buttons */
+    .mode-select { display:flex; gap:12px; margin-bottom:16px; }
+    .mode-card { flex:1; padding:16px; border:1px solid #2b3266; border-radius:12px; background:#161b33; cursor:pointer; text-align:center; transition: all 0.2s; }
+    .mode-card:hover { background:#1e2445; }
+    .mode-card.selected { border-color:var(--accent2); background:linear-gradient(180deg, rgba(94,155,255,.1), transparent); box-shadow:0 0 12px rgba(94,155,255,.15); }
+    .mode-card h3 { margin:0 0 4px 0; color:#fff; }
+    .mode-card p { margin:0; font-size:12px; color:var(--muted); line-height:1.4; }
+
+    /* Toggle Group */
+    .toggle-group { display:flex; gap:0; border-radius:12px; overflow:hidden; border:1px solid #2b3266; width:100%; }
+    .t-btn { flex:1; padding:14px; background:#0e1228; border:none; color:var(--muted); cursor:pointer; font-weight:600; transition:all 0.2s; }
+    .t-btn.active { background:var(--accent2); color:#0b0e1a; }
+    .t-btn:first-child { border-right:1px solid #2b3266; }
+    .t-btn.active[data-val="no"] { background:#2b3266; color:#fff; }
+
+    /* Chart Legend */
+    .chart-legend { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px; font-size:11px; color:var(--muted); }
+    .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; }
+
+    /* Data Table */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px; }
+    .data-table th { text-align: left; color: var(--muted); border-bottom: 1px solid #2b3266; padding: 10px 8px; font-weight: 500; }
+    .data-table td { border-bottom: 1px solid #1e2445; padding: 10px 8px; color: var(--text); }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover { background: #161b33; }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="hero">
+        <h1>LEVL DeepCell Tracker <span class="badge">v4.3</span></h1>
+        <div class="small">Optimized for LIFESPAN+ DeepCell. Focused on sleep depth and recovery.</div>
+      </div>
+      <nav>
+        <button data-tab="setup" class="active">1) Setup</button>
+        <button data-tab="daily">2) Daily Check-in</button>
+        <button data-tab="dashboard">3) Dashboard</button>
+        <button data-tab="export">4) Export</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="setup" class="tab">
+      <div class="grid">
+        <div class="card col-12">
+          <h2 style="margin-top:0">Study Plan</h2>
+          
+          <div class="row">
+            <div><label>Participant Email (Required)</label><input id="participantEmail" type="text" placeholder="name@email.com" style="border-color:var(--accent2)"></div>
+            <div><label>Participant Name</label><input id="participantName" type="text"></div>
+          </div>
+          <div class="row">
+             <div><label>Product</label><input id="productName" type="text" value="LIFESPAN+ DeepCell" readonly style="color:var(--muted)"></div>
+             <div><label>Product Version</label><input id="productVersion" type="text" placeholder="See label, or date received"></div>
+          </div>
+          <div class="row">
+            <div><label>Start Date</label><input id="startDate" type="date"></div>
+            <div><label>Typical Dose Protocol</label><input id="doseNotes" type="text" value="3 capsules 30 mins before bed"></div>
+          </div>
+
+          <div class="divider"></div>
+          <label style="margin-bottom:10px">Select Study Mode:</label>
+          
+          <div class="mode-select">
+            <div class="mode-card selected" id="btn_quick" onclick="setMode('quick')">
+              <h3>🚀 Quick Start</h3>
+              <p>Estimate your baseline now. Start DeepCell immediately.</p>
+            </div>
+            <div class="mode-card" id="btn_adv" onclick="setMode('advanced')">
+              <h3>🔬 Advanced Study</h3>
+              <p>Track for 7 days <b>before</b> starting DeepCell for highest accuracy.</p>
+            </div>
+          </div>
+
+          <div id="quickStartPanel" style="background:#1b2144; padding:14px; border-radius:12px; border:1px solid #2b3266; margin-bottom:16px">
+             <div class="small" style="color:#fff; margin-bottom:12px"><b>Step 2: Estimate your typical baseline.</b> Be honest—this is what we compare against!</div>
+             
+             <div class="row">
+                <div>
+                   <label>Sleep Quality (0-10)</label>
+                   <input id="est_sleep" type="number" min="0" max="10" placeholder="0-10">
+                </div>
+                <div>
+                   <label>Speed to Sleep (0-10)</label>
+                   <div class="small" style="margin-top:-6px; margin-bottom:6px; color:var(--muted)">0=Slow, 10=Instant</div>
+                   <input id="est_latency" type="number" min="0" max="10" placeholder="0-10">
+                </div>
+                <div>
+                   <label>Typical Wake Ups (#)</label>
+                   <input id="est_wakeUps" type="number" min="0" placeholder="e.g. 1">
+                </div>
+             </div>
+
+             <div class="row">
+                <div>
+                   <label>Morning Energy (0-10)</label>
+                   <input id="est_energy" type="number" min="0" max="10" placeholder="0-10">
+                </div>
+                <div>
+                   <label>Grogginess (0-10)</label>
+                   <div class="small" style="margin-top:-6px; margin-bottom:6px; color:var(--muted)">0=None/Alert, 10=Very Groggy</div>
+                   <input id="est_groggy" type="number" min="0" max="10" placeholder="0-10">
+                </div>
+                <div>
+                   <label>Sleep Score (0-100)</label>
+                   <input id="est_score" type="number" min="0" max="100" placeholder="0-100">
+                </div>
+             </div>
+
+             <div class="row">
+                <div><label>Daily Focus (0-10)</label><input id="est_focus" type="number" min="0" max="10" placeholder="0-10"></div>
+                <div><label>Daily Mood (0-10)</label><input id="est_mood" type="number" min="0" max="10" placeholder="0-10"></div>
+                <div>
+                   <label>Daily Stress (0-10)</label>
+                   <div class="small" style="margin-top:-6px; margin-bottom:6px; color:var(--muted)">0=Low, 10=High</div>
+                   <input id="est_stress" type="number" min="0" max="10" placeholder="0-10">
+                </div>
+             </div>
+          </div>
+
+          <div id="advancedPanel" style="display:none; background:#1b2144; padding:14px; border-radius:12px; border:1px solid #2b3266; margin-bottom:16px">
+             <div class="small" style="color:#fff; margin-bottom:12px"><b>Step 2: Set Baseline Phase.</b> Please record data for these days without taking DeepCell.</div>
+             <div><label>Baseline Duration (Days)</label><input id="baselineDays" type="number" min="3" value="7"></div>
+          </div>
+
+          <div class="divider"></div>
+          
+          <details style="border:none; background:transparent;">
+            <summary style="background:transparent; padding:0; color:var(--muted)">Reminders (optional)</summary>
+            <div class="details-body" style="background:transparent; padding:10px 0 0 0; border:none;">
+              <div class="row">
+                <div style="max-width:120px"><label>Enable</label><select id="rem_enable"><option value="off">Off</option><option value="on" selected>On</option></select></div>
+                <div><label>Dose Reminder</label><input id="rem_dose" type="time" value="21:30"></div>
+                <div><label>Morning Check-in</label><input id="rem_nightly" type="time" value="08:00"></div>
+              </div>
+            </div>
+          </details>
+
+          <div class="row" style="margin-top:20px">
+            <button class="btn primary" onclick="savePlan()">Save Plan</button>
+            <button class="btn warn" onclick="hardReset()">Reset All</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="daily" class="tab" style="display:none">
+      <div class="grid">
+        <div class="card col-12">
+          <div class="row" style="justify-content:space-between">
+            <h2 style="margin:0">Daily Check-in</h2>
+            <input id="dailyDate" type="date" style="max-width:160px">
+          </div>
+          <div class="small" style="color:var(--muted);margin-bottom:15px">Fill this out the morning after sleep.</div>
+
+          <div style="background:#0e1228; padding:16px; border-radius:12px; border:1px solid #2b3266; margin-bottom:16px">
+            <div class="section-head"><span>🌙</span> Last Night's Sleep</div>
+            
+            <div class="row" style="margin-bottom:16px; align-items:flex-start">
+               <div style="flex:1">
+                 <label>Took DeepCell last night?</label>
+                 <div class="toggle-group" id="doseToggle">
+                    <button type="button" class="t-btn" data-val="no">Did Not Take</button>
+                    <button type="button" class="t-btn" data-val="yes">Took DeepCell</button>
+                 </div>
+                 <input type="hidden" id="tookDose" value="">
+               </div>
+               <div id="doseAmtWrap" style="max-width:150px; display:none">
+                  <label>Capsules</label>
+                  <input id="doseAmount" type="number" step="1">
+               </div>
+            </div>
+            
+            <div class="slider-row">
+              <label style="min-width:140px">Sleep Quality</label>
+              <input type="range" min="0" max="10" step="0.5" id="s_sleep">
+              <span id="s_sleep_v" style="width:30px;text-align:center">—</span>
+            </div>
+
+            <div class="slider-row">
+              <label style="min-width:140px">Speed to Sleep</label>
+              <input type="range" min="0" max="10" step="0.5" id="s_latency" list="latmarks">
+              <datalist id="latmarks"><option value="0"></option><option value="5"></option><option value="10"></option></datalist>
+              <span id="s_latency_v" style="width:30px;text-align:center">—</span>
+            </div>
+            <div class="small" style="margin:-4px 0 12px 150px; color:var(--muted); font-size:11px;">0=Slow • 5=Baseline/Normal • 10=Near Instant</div>
+
+            <div class="row">
+               <div style="max-width:150px"><label>Wake Ups (#)</label><input id="wakeUps" type="number" min="0" placeholder="#"></div>
+            </div>
+
+            <details style="margin-top:16px; border:1px solid #2b3266; border-radius:12px;">
+              <summary>Wearable Data (Sleep Score, Stages)</summary>
+              <div class="details-body">
+                <div class="row">
+                   <div><label>Sleep Score (0-100)</label><input id="sleepScore" type="number" min="0" max="100"></div>
+                   <div><label>Total Sleep (hr:min)</label><input id="wd_total" type="text" placeholder="e.g. 7:30"></div>
+                </div>
+                <div class="row">
+                   <div><label>Deep Sleep (min)</label><input id="wd_deep" type="number"></div>
+                   <div><label>REM Sleep (min)</label><input id="wd_rem" type="number"></div>
+                </div>
+                <div class="divider"></div>
+                <button class="drop-btn" onclick="document.getElementById('wearableFile').click()">📂 Upload Wearable CSV (Oura/Whoop/Apple)</button>
+                <input id="wearableFile" type="file" accept=".csv,text/csv" style="display:none">
+                <div id="wearableMsg" class="small" style="margin-top:6px; color:var(--ok)"></div>
+              </div>
+            </details>
+          </div>
+
+          <div style="background:#0e1228; padding:16px; border-radius:12px; border:1px solid #2b3266; margin-bottom:16px">
+            <div class="section-head"><span>☀️</span> The Day Following</div>
+            
+            <div class="slider-row"><label style="min-width:140px">🥱 Grogginess</label><input type="range" min="0" max="10" step="0.5" id="s_groggy"><span id="s_groggy_v">—</span></div>
+            <div class="small" style="margin:-4px 0 8px 150px; color:var(--muted); font-size:11px;">0=None/Alert • 10=Very Groggy</div>
+
+            <div class="slider-row"><label style="min-width:140px">⚡️ Energy</label><input type="range" min="0" max="10" step="0.5" id="s_energy"><span id="s_energy_v">—</span></div>
+            <div class="slider-row"><label style="min-width:140px">🎯 Focus</label><input type="range" min="0" max="10" step="0.5" id="s_focus"><span id="s_focus_v">—</span></div>
+            <div class="slider-row"><label style="min-width:140px">🙂 Mood</label><input type="range" min="0" max="10" step="0.5" id="s_mood"><span id="s_mood_v">—</span></div>
+            <div class="slider-row"><label style="min-width:140px">🧘 Stress</label><input type="range" min="0" max="10" step="0.5" id="s_stress"><span id="s_stress_v">—</span></div>
+            <div class="small" style="margin:-4px 0 8px 150px; color:var(--muted); font-size:11px;">0=Low/Zen • 10=High/Panic</div>
+
+            <details style="margin-top:16px; border:1px solid #2b3266; border-radius:12px;">
+              <summary>Optional Advanced Metrics</summary>
+              <div class="details-body">
+                <div class="row">
+                   <div><label>Weight</label><input id="m_weight" type="number" step="0.1" placeholder="kg/lbs"></div>
+                   <div><label>Resting HR</label><input id="m_rhr" type="number" placeholder="bpm"></div>
+                   <div><label>HRV</label><input id="m_hrv" type="number" placeholder="ms"></div>
+                </div>
+                <div class="row">
+                   <div><label>BP (Systolic)</label><input id="m_bp_sys" type="number"></div>
+                   <div><label>BP (Diastolic)</label><input id="m_bp_dia" type="number"></div>
+                </div>
+                <div class="row" style="align-items:flex-end">
+                   <div><label>Reaction Time (ms)</label><input id="m_rt" type="number"></div>
+                   <button class="btn" onclick="runReactionTest()" style="height:42px; margin-bottom:1px; font-size:12px;">Run Test</button>
+                </div>
+              </div>
+            </details>
+          </div>
+
+          <label>Notes</label>
+          <textarea id="dailyNotes" placeholder="Dreams, caffeine, alcohol, stressors..."></textarea>
+
+          <div class="divider"></div>
+
+          <div class="row">
+            <button class="btn primary" onclick="saveDaily()">Save Check-in</button>
+            <div style="flex-grow:1;text-align:right">
+               <button class="btn" onclick="prevDay()">←</button>
+               <button class="btn" onclick="nextDay()">→</button>
+            </div>
+          </div>
+          <div class="hint" id="dayWindowHint" style="text-align:center;margin-top:10px"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="tab" style="display:none">
+      <div class="grid">
+        <div class="card col-12">
+          <div class="row" style="align-items:center">
+            <h2 style="margin:0;flex:2">Dashboard</h2>
+            <div style="flex:1">
+              <label>Metric</label>
+              <select id="metricSelect"></select>
+            </div>
+            <div style="flex:.6">
+              <label>Smooth</label>
+              <input id="smoothN" type="number" min="1" value="1">
+            </div>
+          </div>
+          
+          <div id="chartBox">
+            <svg id="chart" viewBox="0 0 1000 320" preserveAspectRatio="none"></svg>
+            <div class="chart-tooltip" id="tooltip"></div>
+          </div>
+          
+          <div class="chart-legend">
+             <div><span class="dot" style="background:#5c6b7f"></span>0 Caps</div>
+             <div><span class="dot" style="background:#0dcaf0"></span>1 Cap (Lite)</div>
+             <div><span class="dot" style="background:#2d5bff"></span>2 Caps</div>
+             <div><span class="dot" style="background:#7d5fff"></span>3 Caps (Std)</div>
+             <div><span class="dot" style="background:#ffb45e"></span>4+ Caps</div>
+             <div><span class="dot" style="background:transparent; border:1px dashed #20c997; width:16px; height:0; border-radius:0;"></span>Baseline</div>
+          </div>
+          
+          <div class="kpi" style="margin-top:15px">
+            <div class="tile"><h3>Baseline</h3><div class="num" id="baseMean">—</div><div class="small" id="baseLabel">Calculated</div></div>
+            <div class="tile"><h3>DeepCell Avg</h3><div class="num" id="testMean">—</div></div>
+            <div class="tile"><h3>Difference</h3><div class="num" id="deltaMean">—</div></div>
+          </div>
+
+          <details style="margin-top:20px; border:1px solid #2b3266; border-radius:12px;">
+             <summary>View Raw Data (Table)</summary>
+             <div class="details-body" id="rawDataTableContainer">
+                <div class="small muted">Select a metric above to view data.</div>
+             </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="export" class="tab" style="display:none">
+      <div class="grid">
+        <div class="card col-12">
+          <h2 style="margin-top:0">Export Data</h2>
+          <div class="row">
+            <button class="btn primary" onclick="downloadJSON()">Export JSON</button>
+            <button class="btn" onclick="downloadCSV()">Export CSV</button>
+          </div>
+          <div class="divider"></div>
+          <h3>Encrypted Sync</h3>
+          <div class="row">
+            <input id="sync_pass" type="text" placeholder="Passphrase">
+            <button class="btn" onclick="exportEncrypted()">Export Encrypted</button>
+            <button class="btn" onclick="document.getElementById('encFile').click()">Import</button>
+            <input id="encFile" type="file" style="display:none">
+          </div>
+          <div id="encMsg" class="small"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+/*** Data Model (v4.3) ***/
+const STORAGE_KEY = "levl_deepcell_v4_3";
+const defaultState = {
+  version: 4.3,
+  plan: {
+    participantName: "", participantEmail:"", productName: "LIFESPAN+ DeepCell", productVersion:"", startDate: "",
+    baselineDays: 7, doseNotes: "3 capsules 30 mins before bed", defaultDose: 3,
+    mode: "quick",
+    estimates: { sleep: "", latency: "", wakeUps: "", energy: "", groggy: "", focus:"", mood:"", stress:"", score: "" },
+    reminders: { enabled: true, doseTime: "21:30", nightlyTime: "08:00" }
+  },
+  daily: {},
+};
+
+let state = loadState();
+
+/*** Navigation ***/
+document.querySelectorAll("nav button").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const tab = btn.dataset.tab;
+    document.querySelectorAll(".tab").forEach(s=> s.style.display="none");
+    document.getElementById(tab).style.display="";
+    if(tab==="dashboard"){ refreshDashboard(); }
+    if(tab==="daily"){ initDaily(); }
+    if(tab==="setup"){ initSetup(); }
+  })
+});
+
+/*** Helpers ***/
+function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return structuredClone(defaultState);
+    const obj = JSON.parse(raw);
+    obj.plan = Object.assign(structuredClone(defaultState.plan), obj.plan||{});
+    obj.plan.estimates = Object.assign({}, defaultState.plan.estimates, obj.plan.estimates||{});
+    return obj;
+  }catch(e){ return structuredClone(defaultState); }
+}
+function fmt(n, d=1){ if(n==null||Number.isNaN(n)) return "—"; return Number(n).toFixed(d); }
+function dateStr(d){ const z=n=> String(n).padStart(2,"0"); return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate()); }
+function parseDate(s){ const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); }
+function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+function mean(arr){ const a=arr.filter(x=>Number.isFinite(x)); return a.length? a.reduce((s,x)=>s+x,0)/a.length : NaN; }
+
+/*** Metrics Config ***/
+const dailyMetrics = {
+  sleep: {label:"Sleep Quality", min:0, max:10},
+  latency: {label:"Speed to Sleep", min:0, max:10}, 
+  groggy: {label:"Morning Grogginess", min:0, max:10},
+  energy: {label:"Energy", min:0, max:10},
+  focus: {label:"Focus", min:0, max:10},
+  mood: {label:"Mood", min:0, max:10},
+  stress: {label:"Stress", min:0, max:10}
+};
+
+/*** Setup Logic ***/
+function initSetup(){
+  const p = state.plan;
+  if(!p.startDate) p.startDate = dateStr(new Date());
+
+  ["participantName","participantEmail","productVersion","startDate","doseNotes"].forEach(k=> document.getElementById(k).value=p[k]||"");
+  document.getElementById("baselineDays").value=p.baselineDays;
+  document.getElementById("doseAmount").value=p.defaultDose; 
+  setMode(p.mode || "quick");
+  
+  ["sleep","latency","wakeUps","energy","groggy","focus","mood","stress","score"].forEach(k=>{
+     document.getElementById("est_"+k).value = p.estimates[k];
+  });
+
+  document.getElementById("rem_enable").value = p.reminders?.enabled?"on":"off";
+  document.getElementById("rem_dose").value = p.reminders?.doseTime || "21:30";
+  document.getElementById("rem_nightly").value = p.reminders?.nightlyTime || "08:00";
+}
+
+function setMode(mode){
+  state.plan.mode = mode;
+  document.getElementById("btn_quick").classList.toggle("selected", mode==="quick");
+  document.getElementById("btn_adv").classList.toggle("selected", mode==="advanced");
+  document.getElementById("quickStartPanel").style.display = mode==="quick"?"block":"none";
+  document.getElementById("advancedPanel").style.display = mode==="advanced"?"block":"none";
+}
+
+function savePlan(){
+  const p = state.plan;
+  p.participantName = document.getElementById("participantName").value;
+  p.participantEmail = document.getElementById("participantEmail").value;
+  p.productVersion = document.getElementById("productVersion").value;
+  p.startDate = document.getElementById("startDate").value;
+  p.doseNotes = document.getElementById("doseNotes").value;
+  p.baselineDays = Number(document.getElementById("baselineDays").value);
+  
+  ["sleep","latency","wakeUps","energy","groggy","focus","mood","stress","score"].forEach(k=>{
+     const val = document.getElementById("est_"+k).value;
+     p.estimates[k] = (val === "") ? "" : Number(val);
+  });
+  
+  p.reminders = {
+    enabled: document.getElementById("rem_enable").value==="on",
+    doseTime: document.getElementById("rem_dose").value,
+    nightlyTime: document.getElementById("rem_nightly").value
+  };
+  saveState(); alert("Plan Saved");
+}
+
+/*** Danger Zone ***/
+function hardReset(){
+  if(!confirm("Clear ALL data?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+/*** Daily Logic ***/
+function initDaily(){
+  const dd = document.getElementById("dailyDate");
+  if(!dd.value) dd.value = dateStr(new Date());
+  
+  Object.keys(dailyMetrics).forEach(k=>{
+    const el = document.getElementById("s_"+k);
+    const out = document.getElementById("s_"+k+"_v");
+    el.oninput = ()=> out.textContent = el.value;
+  });
+  
+  document.querySelectorAll("#doseToggle .t-btn").forEach(btn=>{
+     btn.onclick = () => {
+        document.querySelectorAll("#doseToggle .t-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        const val = btn.dataset.val;
+        document.getElementById("tookDose").value = val;
+        document.getElementById("doseAmtWrap").style.display = (val==="yes")?"block":"none";
+     };
+  });
+
+  document.getElementById("dailyDate").onchange = loadDailyToUI;
+  loadDailyToUI();
+}
+
+function loadDailyToUI(){
+  const d = document.getElementById("dailyDate").value;
+  const r = state.daily[d] || {};
+  
+  const took = r.tookDose || "no";
+  document.getElementById("tookDose").value = took;
+  document.querySelectorAll("#doseToggle .t-btn").forEach(b=> {
+     if(b.dataset.val===took) b.classList.add("active"); else b.classList.remove("active");
+  });
+  document.getElementById("doseAmtWrap").style.display = (took==="yes")?"block":"none";
+  document.getElementById("doseAmount").value = r.doseAmount || state.plan.defaultDose;
+  
+  Object.keys(dailyMetrics).forEach(k=>{
+     const val = r.sliders?.[k];
+     const el = document.getElementById("s_"+k);
+     const out = document.getElementById("s_"+k+"_v");
+     if(val!=null){ el.value=val; out.textContent=val; } else { el.value=5; out.textContent="—"; }
+  });
+  
+  document.getElementById("wakeUps").value = r.wakeUps ?? "";
+  const w = r.wearables || {};
+  document.getElementById("sleepScore").value = w.score ?? "";
+  document.getElementById("wd_total").value = w.total || "";
+  document.getElementById("wd_deep").value = w.deep || "";
+  document.getElementById("wd_rem").value = w.rem || "";
+
+  const m = r.metrics || {};
+  ["m_weight","m_rhr","m_hrv","m_bp_sys","m_bp_dia","m_rt"].forEach(id => {
+      document.getElementById(id).value = m[id.replace("m_","")] ?? "";
+  });
+  document.getElementById("dailyNotes").value = r.notes || "";
+  document.getElementById("wearableMsg").textContent = "";
+  
+  if(state.plan.startDate){
+     const start=parseDate(state.plan.startDate);
+     const cur=parseDate(d);
+     const isQuick = state.plan.mode==="quick";
+     let phase = "";
+     if(isQuick) {
+        if(cur >= start) phase = "Test (On Product)"; else phase = "Pre-Start";
+     } else {
+        const baseEnd=addDays(start, state.plan.baselineDays-1);
+        if(cur >= start && cur <= baseEnd) phase = "Baseline Phase";
+        else if(cur > baseEnd) phase = "Test (On Product)";
+        else phase = "Pre-Start";
+     }
+     document.getElementById("dayWindowHint").textContent = `Phase: ${phase}`;
+  }
+}
+
+function saveDaily(){
+  const d = document.getElementById("dailyDate").value;
+  const r = state.daily[d] || {sliders:{}};
+  r.tookDose = document.getElementById("tookDose").value;
+  if(r.tookDose==="yes") r.doseAmount = Number(document.getElementById("doseAmount").value);
+  else delete r.doseAmount;
+  
+  r.sliders = r.sliders || {};
+  Object.keys(dailyMetrics).forEach(k=>{ r.sliders[k] = Number(document.getElementById("s_"+k).value); });
+  const wu = document.getElementById("wakeUps").value;
+  if(wu!=="") r.wakeUps = Number(wu); else delete r.wakeUps;
+  r.wearables = {
+    score: document.getElementById("sleepScore").value,
+    total: document.getElementById("wd_total").value,
+    deep: document.getElementById("wd_deep").value,
+    rem: document.getElementById("wd_rem").value
+  };
+  r.metrics = {};
+  ["m_weight","m_rhr","m_hrv","m_bp_sys","m_bp_dia","m_rt"].forEach(id => {
+      const v = document.getElementById(id).value;
+      if(v!=="") r.metrics[id.replace("m_","")] = Number(v);
+  });
+  r.notes = document.getElementById("dailyNotes").value;
+  state.daily[d] = r;
+  saveState();
+  alert("Saved");
+}
+
+function prevDay(){ const d=parseDate(document.getElementById("dailyDate").value); document.getElementById("dailyDate").value=dateStr(addDays(d,-1)); loadDailyToUI(); }
+function nextDay(){ const d=parseDate(document.getElementById("dailyDate").value); document.getElementById("dailyDate").value=dateStr(addDays(d,1)); loadDailyToUI(); }
+
+/*** Wearables Logic ***/
+const fin = document.getElementById("wearableFile");
+fin.onchange=()=> {if(fin.files[0]) parseCSV(fin.files[0]);};
+async function parseCSV(file){
+  const txt = await file.text();
+  const rows = txt.split(/\r?\n/).map(r=>r.split(","));
+  const head = rows[0].map(s=>s.toLowerCase().replace(/[\s_"]/g,""));
+  const colDate = head.findIndex(h=>h.includes("date")||h.includes("day"));
+  const colRHR = head.findIndex(h=>h.includes("rest")&&h.includes("heart"));
+  const colHRV = head.findIndex(h=>h.includes("hrv")||h.includes("rmssd"));
+  const colScore = head.findIndex(h=>h.includes("score")&&h.includes("sleep"));
+  let cnt=0;
+  for(let i=1; i<rows.length; i++){
+    const r = rows[i];
+    if(!r[colDate]) continue;
+    let dStr = r[colDate];
+    if(!dStr.includes("-")) dStr = new Date(dStr).toISOString().slice(0,10); 
+    state.daily[dStr] = state.daily[dStr] || {sliders:{}};
+    state.daily[dStr].metrics = state.daily[dStr].metrics || {};
+    state.daily[dStr].wearables = state.daily[dStr].wearables || {};
+    if(colRHR>-1 && Number(r[colRHR])) state.daily[dStr].metrics.rhr = Number(r[colRHR]);
+    if(colHRV>-1 && Number(r[colHRV])) state.daily[dStr].metrics.hrv = Number(r[colHRV]);
+    if(colScore>-1 && Number(r[colScore])) {
+       state.daily[dStr].wearables.score = Number(r[colScore]);
+       cnt++;
+    }
+  }
+  saveState();
+  document.getElementById("wearableMsg").textContent = `Imported ${cnt} entries.`;
+  loadDailyToUI(); 
+}
+
+/*** Mini Tasks ***/
+function runReactionTest(){
+   const overlay = document.createElement("div");
+   Object.assign(overlay.style, {position:"fixed",inset:0,zIndex:999,background:"#0b0e1a",display:"flex",alignItems:"center",justifyContent:"center", color:"#fff", fontSize:"24px", cursor:"pointer"});
+   overlay.innerHTML = "Wait for Green...";
+   document.body.appendChild(overlay);
+   const t0 = performance.now();
+   const delay = 2000 + Math.random()*2500;
+   let ready = false; let start = 0;
+   setTimeout(()=>{
+     overlay.style.background = "#47d16a"; overlay.innerHTML = "TAP!"; start = performance.now(); ready = true;
+   }, delay);
+   overlay.onmousedown = overlay.ontouchstart = (e) => {
+     e.preventDefault();
+     if(!ready) { if(performance.now()-t0 > 500) { overlay.remove(); alert("Too early!"); } return; }
+     const rt = Math.round(performance.now() - start);
+     overlay.remove(); document.getElementById("m_rt").value = rt; alert(`Reaction Time: ${rt}ms`);
+   };
+}
+
+/*** Dashboard ***/
+function refreshDashboard(){
+  const sel = document.getElementById("metricSelect");
+  if(sel.options.length===0){
+    Object.keys(dailyMetrics).forEach(k=> sel.add(new Option(dailyMetrics[k].label, "s."+k)));
+    sel.add(new Option("Sleep Score", "w.score"));
+    sel.add(new Option("Total Sleep (hrs)", "w.total"));
+    sel.add(new Option("Deep Sleep (min)", "w.deep"));
+    sel.add(new Option("REM Sleep (min)", "w.rem"));
+    sel.add(new Option("Wake Ups", "d.wakeUps"));
+    sel.add(new Option("Reaction Time", "m.rt"));
+    sel.add(new Option("Resting HR", "m.rhr"));
+    sel.add(new Option("HRV", "m.hrv"));
+    sel.value = "s.sleep";
+  }
+  
+  const metric = sel.value;
+  const days = Object.keys(state.daily).sort();
+  const start = parseDate(state.plan.startDate);
+  const isQuick = state.plan.mode==="quick";
+  
+  let baseEnd;
+  if(isQuick) baseEnd = addDays(start, -1);
+  else baseEnd = addDays(start, state.plan.baselineDays-1);
+
+  let baseVals=[], testVals=[];
+  let series = [];
+  
+  days.forEach(d=>{
+    const r = state.daily[d]; if(!r) return;
+    let v = null;
+    const type = metric.slice(0,2); const k = metric.slice(2);
+    if(type==="s.") v = r.sliders?.[k];
+    else if(type==="w.") v = r.wearables?.[k];
+    else if(type==="m.") v = r.metrics?.[k];
+    else if(type==="d.") v = r[k];
+    
+    if(k==="total" && typeof v === "string" && v.includes(":")){
+       const parts = v.split(":");
+       v = Number(parts[0]) + Number(parts[1])/60;
+    }
+    
+    v = Number(v);
+    
+    if(Number.isFinite(v)){
+       // COLOR LOGIC (3 Capsules = Standard)
+       let doseColor = "#5c6b7f"; // 0
+       let label = "No Dose";
+       if(r.tookDose==="yes"){
+          const amt = r.doseAmount || 3;
+          if(amt <= 1.5) { doseColor = "#0dcaf0"; label="1 Cap"; } // 1 (Cyan)
+          else if(amt <= 2.5) { doseColor = "#2d5bff"; label="2 Caps"; } // 2 (Blue)
+          else if(amt <= 3.5) { doseColor = "#7d5fff"; label="3 Caps"; } // 3 (Purple - Std)
+          else { doseColor = "#ffb45e"; label="4+ Caps"; } // 4+ (Orange)
+       }
+       series.push({date:d, val:v, color:doseColor, label:label});
+       
+       const dt = parseDate(d);
+       if(!isQuick && dt<=baseEnd) baseVals.push(v);
+       else if(dt>baseEnd && r.tookDose==="yes") testVals.push(v);
+       if(isQuick && dt>=start && r.tookDose==="yes") testVals.push(v);
+    }
+  });
+  
+  // KPI Calc
+  let mBase;
+  const label = document.getElementById("baseLabel");
+  if(isQuick) {
+     label.textContent = "Estimated";
+     const k = metric.slice(2); 
+     mBase = state.plan.estimates[k];
+     if(metric==="w.score") mBase = state.plan.estimates.score;
+     if(metric==="d.wakeUps") mBase = state.plan.estimates.wakeUps;
+     if(mBase === "") mBase = NaN;
+  } else {
+     label.textContent = "Calculated";
+     mBase = mean(baseVals);
+  }
+  const mTest = mean(testVals);
+  document.getElementById("baseMean").textContent = fmt(mBase);
+  document.getElementById("testMean").textContent = fmt(mTest);
+  document.getElementById("deltaMean").textContent = (mTest-mBase)>0 ? "+"+fmt(mTest-mBase) : fmt(mTest-mBase);
+  
+  const metricType = metric.slice(2); 
+  let rangeConfig = { min:0, max:10 }; 
+  if(metric==="w.score") rangeConfig = {min:0, max:100};
+  else if(metric==="m.rhr" || metric==="m.hrv" || metric==="m.rt" || metric==="m.weight" || metric==="w.deep" || metric==="w.rem") rangeConfig = "auto";
+  else if(metric==="d.wakeUps" || metric==="w.total") rangeConfig = "autoZero";
+
+  drawChart(series, mBase, rangeConfig);
+  renderRawTable(series);
+}
+
+document.getElementById("metricSelect").addEventListener("change", refreshDashboard);
+
+function drawChart(data, baselineRef, scaleConfig){
+  const svg = document.getElementById("chart");
+  // Clear but keep tooltip
+  const tooltip = document.getElementById("tooltip");
+  svg.innerHTML = "";
+  
+  const W=1000, H=320;
+  const padL=40, padR=20, padT=20, padB=30;
+  
+  let vals = data.map(d=>d.val);
+  if(Number.isFinite(baselineRef)) vals.push(baselineRef);
+  
+  let yMin, yMax;
+  if(scaleConfig === "auto"){
+     yMin = Math.min(...vals); yMax = Math.max(...vals);
+     const pad = (yMax-yMin)*0.1 || 1; yMin-=pad; yMax+=pad;
+  } else if (scaleConfig === "autoZero") {
+     yMin = 0; yMax = Math.max(...vals, 5);
+  } else {
+     yMin = scaleConfig.min; yMax = scaleConfig.max;
+  }
+  if(isNaN(yMin)) yMin=0; if(isNaN(yMax)) yMax=10;
+  if(yMax===yMin) yMax+=1;
+
+  const yRange = yMax - yMin;
+  const numGrid = 5;
+  for(let i=0; i<=numGrid; i++){
+     const val = yMin + (i/numGrid)*yRange;
+     const y = H - padB - (i/numGrid)*(H-padT-padB);
+     
+     const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+     line.setAttribute("x1", padL); line.setAttribute("x2", W-padR);
+     line.setAttribute("y1", y); line.setAttribute("y2", y);
+     line.setAttribute("stroke", "#2b3266"); line.setAttribute("stroke-width", "1");
+     svg.appendChild(line);
+     
+     const txt = document.createElementNS("http://www.w3.org/2000/svg","text");
+     txt.setAttribute("x", padL-5); txt.setAttribute("y", y+4);
+     txt.setAttribute("fill", "#7f88a9"); txt.setAttribute("font-size", "11");
+     txt.setAttribute("text-anchor", "end");
+     txt.textContent = Math.round(val);
+     svg.appendChild(txt);
+  }
+
+  if(data.length > 0){
+     const xStep = (W-padL-padR) / Math.max(1, data.length-1);
+     data.forEach((d,i)=>{
+        const skip = data.length > 12 ? Math.ceil(data.length/10) : 1;
+        if(i % skip === 0){
+           const x = padL + i*xStep;
+           const txt = document.createElementNS("http://www.w3.org/2000/svg","text");
+           txt.setAttribute("x", x); txt.setAttribute("y", H-10);
+           txt.setAttribute("fill", "#7f88a9"); txt.setAttribute("font-size", "10");
+           txt.setAttribute("text-anchor", "middle");
+           const parts = d.date.split("-");
+           txt.textContent = `${parts[1]}/${parts[2]}`;
+           svg.appendChild(txt);
+        }
+     });
+  }
+
+  const getX = (i) => padL + i * ((W-padL-padR)/Math.max(1, data.length-1));
+  const getY = (v) => H - padB - ((v-yMin)/yRange)*(H-padT-padB);
+
+  // Baseline
+  if(Number.isFinite(baselineRef)){
+    const yB = getY(baselineRef);
+    if(yB >= padT && yB <= H-padB) {
+        const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+        line.setAttribute("x1",padL); line.setAttribute("x2",W-padR); 
+        line.setAttribute("y1",yB); line.setAttribute("y2",yB);
+        line.setAttribute("stroke", "#20c997");
+        line.setAttribute("stroke-width", "2.5");
+        line.setAttribute("stroke-dasharray", "6,4");
+        line.setAttribute("opacity", "0.9");
+        svg.appendChild(line);
+    }
+  }
+
+  if(data.length > 0) {
+    let path = "";
+    data.forEach((d,i)=>{
+      const x = getX(i); const y = getY(d.val);
+      path += (i===0?"M":"L") + ` ${x} ${y}`;
+    });
+    const line = document.createElementNS("http://www.w3.org/2000/svg","path");
+    line.setAttribute("d", path); line.setAttribute("stroke", "#5e9bff"); line.setAttribute("fill", "none"); line.setAttribute("stroke-width", "2"); line.setAttribute("opacity", "0.5");
+    svg.appendChild(line);
+
+    // Interactive Dots
+    data.forEach((d,i)=>{
+       const x = getX(i); const y = getY(d.val);
+       const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+       c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 6);
+       c.setAttribute("fill", d.color);
+       c.setAttribute("stroke", "#0b0e1a"); c.setAttribute("stroke-width", "2");
+       c.style.cursor = "pointer";
+       
+       // Tooltip events
+       const showTip = (e) => {
+          tooltip.style.opacity = 1;
+          tooltip.innerHTML = `<b>${d.date}</b><br/>Value: ${d.val}<br/>${d.label}`;
+          tooltip.style.left = (e.layerX || e.offsetX) + "px";
+          tooltip.style.top = (e.layerY || e.offsetY) - 10 + "px";
+       };
+       c.addEventListener("mouseenter", showTip);
+       c.addEventListener("click", showTip);
+       c.addEventListener("mouseleave", () => tooltip.style.opacity = 0);
+       
+       svg.appendChild(c);
+    });
+  }
+}
+
+function renderRawTable(data){
+   const box = document.getElementById("rawDataTableContainer");
+   if(data.length === 0) {
+      box.innerHTML = `<div class="small muted">No data available for this metric.</div>`;
+      return;
+   }
+   let html = `<table class="data-table"><thead><tr><th>Date</th><th>Value</th><th>Dose</th></tr></thead><tbody>`;
+   // Show newest first
+   [...data].reverse().forEach(d => {
+      html += `<tr>
+        <td>${d.date}</td>
+        <td><b>${d.val}</b></td>
+        <td><span class="dot" style="background:${d.color}"></span>${d.label}</td>
+      </tr>`;
+   });
+   html += `</tbody></table>`;
+   box.innerHTML = html;
+}
+
+/*** Export ***/
+function downloadCSV(){
+  const h = ["date","tookDose","doseAmount","sleep_score","sleep_quality","speed_to_sleep","groggy","wake_ups","total_sleep","deep","rem","energy","focus","mood","stress","weight","rhr","hrv","bp_sys","bp_dia","reaction_time","notes"];
+  let csv = h.join(",")+"\n";
+  Object.keys(state.daily).sort().forEach(d=>{
+    const r=state.daily[d]; const s=r.sliders||{}; const w=r.wearables||{}; const m=r.metrics||{};
+    const row = [d, r.tookDose, r.doseAmount, w.score, s.sleep, s.latency, s.groggy, r.wakeUps, w.total, w.deep, w.rem, s.energy, s.focus, s.mood, s.stress, m.weight, m.rhr, m.hrv, m.bp_sys, m.bp_dia, m.rt, (r.notes||"").replace(/,/g,";")];
+    csv += row.join(",")+"\n";
+  });
+  const blob = new Blob([csv], {type:"text/csv"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="levl_deepcell_v4_3.csv"; a.click();
+}
+
+initSetup();
+initDaily();
+</script>
+</body>
+</html>
