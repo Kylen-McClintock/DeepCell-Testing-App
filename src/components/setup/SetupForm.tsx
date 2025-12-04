@@ -52,7 +52,7 @@ export default function SetupForm() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                    <label className="block text-[var(--muted)] text-sm mb-1">Participant Email (Required)</label>
+                    <label className="block text-[var(--muted)] text-sm mb-1">Participant Email</label>
                     <input
                         type="text"
                         className="input-field border-[var(--accent2)]"

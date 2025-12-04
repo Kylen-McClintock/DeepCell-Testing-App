@@ -44,9 +44,10 @@ export function useStore() {
 
                         const plan: Plan = {
                             ...defaultState.plan,
+                            participantEmail: session.user.email || "",
                             ...(profile ? {
                                 participantName: profile.participant_name,
-                                participantEmail: profile.participant_email,
+                                participantEmail: profile.participant_email || session.user.email || "",
                                 productName: profile.product_name,
                                 productVersion: profile.product_version,
                                 startDate: profile.start_date,
