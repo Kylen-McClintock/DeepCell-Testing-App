@@ -1,3 +1,26 @@
+export interface Profile {
+    participantName: string;
+    participantEmail: string;
+}
+
+export interface Modality {
+    id: string;
+    name: string;
+    description: string;
+    category: string;
+    defaultInstructions: string;
+    metadata?: Record<string, any>;
+}
+
+export interface Protocol {
+    id: string;
+    title: string;
+    description: string;
+    isRecommended: boolean;
+    isPublic: boolean;
+    modalities?: Modality[];
+}
+
 export interface Estimates {
     sleep: number | "";
     latency: number | "";
@@ -16,18 +39,16 @@ export interface Reminders {
     nightlyTime: string;
 }
 
-export interface Plan {
-    participantName: string;
-    participantEmail: string;
-    productName: string;
-    productVersion: string;
+export interface UserProtocol {
+    id?: string;
+    userId?: string;
     startDate: string;
     baselineDays: number;
-    doseNotes: string;
-    defaultDose: number;
-    mode: "quick" | "advanced";
+    activeModalities: Modality[];
     estimates: Estimates;
     reminders: Reminders;
+    mode: "quick" | "advanced";
+    status?: 'active' | 'archived';
 }
 
 export interface DailyMetrics {
@@ -58,8 +79,8 @@ export interface AdvancedMetrics {
 
 export interface DailyLog {
     date: string;
-    tookDose: "yes" | "no";
-    doseAmount?: number;
+    userProtocolId?: string;
+    adherence: Record<string, boolean>; // map of modality ID to adherence boolean
     sliders: DailyMetrics;
     wakeUps?: number;
     wearables: Wearables;
@@ -69,34 +90,19 @@ export interface DailyLog {
 
 export interface AppState {
     version: number;
-    plan: Plan;
+    profile: Profile;
+    activeProtocol: UserProtocol | null;
+    availableModalities: Modality[];
     daily: Record<string, DailyLog>;
 }
 
 export const defaultState: AppState = {
-    version: 4.3,
-    plan: {
+    version: 5.0,
+    profile: {
         participantName: "",
-        participantEmail: "",
-        productName: "LIFESPAN+ DeepCell",
-        productVersion: "",
-        startDate: "",
-        baselineDays: 7,
-        doseNotes: "3 capsules 30 mins before bed",
-        defaultDose: 3,
-        mode: "quick",
-        estimates: {
-            sleep: "",
-            latency: "",
-            wakeUps: "",
-            energy: "",
-            groggy: "",
-            focus: "",
-            mood: "",
-            stress: "",
-            score: "",
-        },
-        reminders: { enabled: true, doseTime: "21:30", nightlyTime: "08:00" },
+        participantEmail: ""
     },
+    activeProtocol: null,
+    availableModalities: [],
     daily: {},
 };

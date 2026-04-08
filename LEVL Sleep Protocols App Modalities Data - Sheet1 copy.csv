@@ -1,0 +1,603 @@
+,,,,
+,,,,
+,Modality,Attribute,Rating,Explanation
+,DeepCell,Evidence Quality,80,High cumulative evidence from clinically validated ingredients.[1]
+,DeepCell,Effect Size,90,Large synergistic impact on sleep latency and architecture.[1]
+,DeepCell,Safety Margin,90,Broad safety with optimized trace physiological doses.[1]
+,DeepCell,Fasting Compatibility,90,Insulin-sensitizing and completely safe for fasting regimens.[1]
+,DeepCell,Human Effective Dose Range,90,Meticulously balanced doses across 13 active ingredients.[1]
+,DeepCell,Synergy Potential,99,Maximum synergy via orthogonal biological pathways.[1]
+,DeepCell,Contraindications & Interaction Risk,80,Low risk but botanical components require care with certain pharmaceuticals.[2]
+,DeepCell,Mechanism-of-Action Pathway Links,99,"Targets GABA, serotonin, and autophagy pathways comprehensively.[1]"
+,DeepCell,Hallmarks of Aging Impact Vector,99,Specifically targets 8 distinct cellular aging hallmarks.[1]
+,DeepCell,Antagonism Risk,90,Formulated explicitly to avoid pathway collision.[1]
+,DeepCell,Adverse Event Profile,90,Negligible morning grogginess or hangover effects.[1]
+,DeepCell,Timing / Circadian Sensitivity,90,Optimized strictly for nocturnal PM administration.[1]
+,CBT-I,Evidence Quality,99,Consensus first-line treatment with flawless clinical validation.[3]
+,CBT-I,Effect Size,99,Large durable effects on sleep latency and efficiency.[4]
+,CBT-I,Safety Margin,99,Practically infinite safety as a non-pharmacological intervention.[5]
+,CBT-I,Fasting Compatibility,99,Universally compatible requiring no ingestion.
+,CBT-I,Human Effective Dose Range,0,Not applicable for behavioral intervention.
+,CBT-I,Synergy Potential,90,Behavioral scaffold that pairs with all nutraceuticals.
+,CBT-I,Contraindications & Interaction Risk,99,Zero interaction risk with pharmaceuticals.
+,CBT-I,Mechanism-of-Action Pathway Links,50,Operates via psychological neuroplasticity and autonomic arousal reduction.
+,CBT-I,Hallmarks of Aging Impact Vector,70,Indirectly halts oxidative stress by consolidating sleep.[6]
+,CBT-I,Antagonism Risk,99,Zero pathway competition with other modalities.
+,CBT-I,Adverse Event Profile,99,Zero adverse event severity.
+,CBT-I,Timing / Circadian Sensitivity,80,Requires rigid adherence to specific wake-times.
+,Morning Sunlight,Evidence Quality,90,Exceptionally high validation across diverse global populations.[7]
+,Morning Sunlight,Effect Size,70,Moderate but significant effect on sleep midpoint alignment.[7]
+,Morning Sunlight,Safety Margin,90,High safety if dermatological UV limits are respected.
+,Morning Sunlight,Fasting Compatibility,99,Universally compatible.
+,Morning Sunlight,Human Effective Dose Range,0,Not applicable.
+,Morning Sunlight,Synergy Potential,80,Pairs perfectly with evening light reduction strategies.
+,Morning Sunlight,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Morning Sunlight,Mechanism-of-Action Pathway Links,90,Directly activates suprachiasmatic nucleus via ipRGCs.[8]
+,Morning Sunlight,Hallmarks of Aging Impact Vector,80,Combats deregulated nutrient sensing and stabilizes circadian clock.[9]
+,Morning Sunlight,Antagonism Risk,99,No molecular antagonism.
+,Morning Sunlight,Adverse Event Profile,99,Negligible risk unless overexposed to UV.
+,Morning Sunlight,Timing / Circadian Sensitivity,99,Critical dependency on early biological day exposure.[7]
+,Temperature Regulation,Evidence Quality,80,Universally accepted evidence for facilitating sleep onset.[10]
+,Temperature Regulation,Effect Size,70,Consistent reduction in latency varying by baseline metabolic rate.[11]
+,Temperature Regulation,Safety Margin,99,Expansive margin with zero toxicity risk.[12]
+,Temperature Regulation,Fasting Compatibility,99,Universally compatible.
+,Temperature Regulation,Human Effective Dose Range,0,Not applicable.
+,Temperature Regulation,Synergy Potential,90,Essential pairing with weighted blankets to offset heat retention.[11]
+,Temperature Regulation,Contraindications & Interaction Risk,99,Zero risk of drug interactions.
+,Temperature Regulation,Mechanism-of-Action Pathway Links,70,Initiates REM sleep thermal window via PO neurons.[10]
+,Temperature Regulation,Hallmarks of Aging Impact Vector,80,Prevents hyperthermia-accelerated loss of proteostasis.[13]
+,Temperature Regulation,Antagonism Risk,99,Zero antagonism risk.
+,Temperature Regulation,Adverse Event Profile,99,Only triggers if temperatures fall to shivering thresholds.
+,Temperature Regulation,Timing / Circadian Sensitivity,80,Requires cooling specifically during the sleep phase.
+,Magnesium Glycinate,Evidence Quality,90,High clinical validation for subjective sleep and metabolic markers.[14]
+,Magnesium Glycinate,Effect Size,80,Impressive effects on glycemic control and mild sedation.[14]
+,Magnesium Glycinate,Safety Margin,90,Excellent safety margin with intact renal function.
+,Magnesium Glycinate,Fasting Compatibility,99,Lowers fasting plasma glucose making it highly compatible.[15]
+,Magnesium Glycinate,Human Effective Dose Range,90,Standardized effective dose spans 100 to 350 mg.[14]
+,Magnesium Glycinate,Synergy Potential,90,Vast complementary effects with L-theanine and apigenin.[16]
+,Magnesium Glycinate,Contraindications & Interaction Risk,90,Minimal risk but competes with zinc for absorption.[17]
+,Magnesium Glycinate,Mechanism-of-Action Pathway Links,80,Antagonizes NMDA and acts as GABA agonist.[16]
+,Magnesium Glycinate,Hallmarks of Aging Impact Vector,80,Addresses deregulated nutrient sensing via ATP-sensitive K channels.[18]
+,Magnesium Glycinate,Antagonism Risk,90,Low risk of pathway collision.
+,Magnesium Glycinate,Adverse Event Profile,90,Very low side-effect profile.
+,Magnesium Glycinate,Timing / Circadian Sensitivity,70,Effective pre-bedtime but flexible.
+,NSDR / Yoga Nidra,Evidence Quality,80,Moderate to high clinical evidence for autonomic balance.[19]
+,NSDR / Yoga Nidra,Effect Size,80,Clinically profound for accelerating sleep onset.[19]
+,NSDR / Yoga Nidra,Safety Margin,99,Absolute safety with non-existent toxicity.
+,NSDR / Yoga Nidra,Fasting Compatibility,99,Universally compatible.
+,NSDR / Yoga Nidra,Human Effective Dose Range,0,Not applicable.
+,NSDR / Yoga Nidra,Synergy Potential,90,Pairs with all modalities and can be deployed mid-day.[20]
+,NSDR / Yoga Nidra,Contraindications & Interaction Risk,99,Zero risk of pharmaceutical interactions.
+,NSDR / Yoga Nidra,Mechanism-of-Action Pathway Links,60,Downshifts EEG activity from beta to alpha/theta waves.[21]
+,NSDR / Yoga Nidra,Hallmarks of Aging Impact Vector,80,Reduces molecular drivers of inflammaging by lowering cortisol.[22]
+,NSDR / Yoga Nidra,Antagonism Risk,99,Zero pathway collision risk.
+,NSDR / Yoga Nidra,Adverse Event Profile,99,Negligible adverse events.
+,NSDR / Yoga Nidra,Timing / Circadian Sensitivity,60,Highly versatile for both daytime and nocturnal use.[20]
+,L-Theanine,Evidence Quality,80,Solid evidence for reducing stress and improving subjective sleep.[16]
+,L-Theanine,Effect Size,70,Moderate effect size for relaxation and attention.[23]
+,L-Theanine,Safety Margin,99,Exceptionally high NOAEL with minimal toxicity.[23]
+,L-Theanine,Fasting Compatibility,99,Non-insulinogenic and entirely compatible.
+,L-Theanine,Human Effective Dose Range,80,Standardized effective dose of 100 to 200 mg.[23]
+,L-Theanine,Synergy Potential,80,Highly synergistic with magnesium and flavonoids.[16]
+,L-Theanine,Contraindications & Interaction Risk,90,Lacks severe interaction risks.
+,L-Theanine,Mechanism-of-Action Pathway Links,80,Increases GABAergic expression and alpha brain waves.[16]
+,L-Theanine,Hallmarks of Aging Impact Vector,80,Suppresses AGEs and upregulates FoxO1 transcription factor.[24]
+,L-Theanine,Antagonism Risk,90,Minimal risk of competing with other relaxation pathways.
+,L-Theanine,Adverse Event Profile,99,Rare reports of mild headache.
+,L-Theanine,Timing / Circadian Sensitivity,60,Can be used daytime or nighttime for relaxed alertness.
+,Apigenin,Evidence Quality,70,Anecdotal efficacy high but isolated clinical insomnia trials are developing.[25]
+,Apigenin,Effect Size,70,Moderate effects on systemic inflammation and anxiety reduction.[25]
+,Apigenin,Safety Margin,90,High margin with no significant toxicity at standard doses.[26]
+,Apigenin,Fasting Compatibility,99,Fully compatible and supports metabolic health.
+,Apigenin,Human Effective Dose Range,80,Standard targeted dose of 50 mg utilized in longevity protocols.[27]
+,Apigenin,Synergy Potential,80,Maximizes autophagic cascade when combined with Luteolin.[28]
+,Apigenin,Contraindications & Interaction Risk,80,Slight risk via hepatic enzyme inhibition with certain drugs.[29]
+,Apigenin,Mechanism-of-Action Pathway Links,90,Direct CD38 inhibitor preserving intracellular NAD pools.[25]
+,Apigenin,Hallmarks of Aging Impact Vector,90,Directly supports Sirtuin activity and initiates autophagy.[28]
+,Apigenin,Antagonism Risk,90,Low risk when intelligently stacked.
+,Apigenin,Adverse Event Profile,99,Extremely low side-effect profile at appropriate doses.[26]
+,Apigenin,Timing / Circadian Sensitivity,60,Flexible but optimal pre-bed for GABA-A anxiolytic effects.
+,Dim Lights Before Bed,Evidence Quality,90,Bedrock of modern sleep hygiene with exceptional validation.[30]
+,Dim Lights Before Bed,Effect Size,70,Substantial impact on aligning the circadian phase.
+,Dim Lights Before Bed,Safety Margin,99,Absolute safety.
+,Dim Lights Before Bed,Fasting Compatibility,99,Universally compatible.
+,Dim Lights Before Bed,Human Effective Dose Range,0,Not applicable.
+,Dim Lights Before Bed,Synergy Potential,80,Essential foundation for all other circadian interventions.
+,Dim Lights Before Bed,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Dim Lights Before Bed,Mechanism-of-Action Pathway Links,70,Permits unhindered degradation of PER and CRY proteins.
+,Dim Lights Before Bed,Hallmarks of Aging Impact Vector,70,Defends natural melatonin surge preventing mitochondrial dysfunction.
+,Dim Lights Before Bed,Antagonism Risk,99,Zero antagonism risk.
+,Dim Lights Before Bed,Adverse Event Profile,99,Lacks any adverse event profile.
+,Dim Lights Before Bed,Timing / Circadian Sensitivity,90,Must commence 90 to 120 minutes prior to sleep onset.[31]
+,Trace Lithium Orotate,Evidence Quality,70,Accelerating evidence for cognitive stabilization at trace doses.[32]
+,Trace Lithium Orotate,Effect Size,70,Moderate effect on longevity and cognitive preservation.[32]
+,Trace Lithium Orotate,Safety Margin,90,Expertly avoids renal/thyroid toxicities of psychiatric megadosing.[33]
+,Trace Lithium Orotate,Fasting Compatibility,99,Fully compatible.
+,Trace Lithium Orotate,Human Effective Dose Range,80,Optimal trace element dosing spans 1 to 5 mg daily.[33]
+,Trace Lithium Orotate,Synergy Potential,80,Excellent when combined with other autophagy inducers.
+,Trace Lithium Orotate,Contraindications & Interaction Risk,70,Theoretical caution with potent serotonergic agents.[34]
+,Trace Lithium Orotate,Mechanism-of-Action Pathway Links,90,Direct inhibitor of GSK-3 beta regulatory kinase.[35]
+,Trace Lithium Orotate,Hallmarks of Aging Impact Vector,90,Stimulates autophagy and clears neurotoxic protein aggregates.[36]
+,Trace Lithium Orotate,Antagonism Risk,80,Competes with magnesium at high doses but safe at trace levels.[30]
+,Trace Lithium Orotate,Adverse Event Profile,90,Negligible side effects at microdose concentrations.
+,Trace Lithium Orotate,Timing / Circadian Sensitivity,60,Flexible timing due to systemic neuroprotective mechanisms.
+,Ashwagandha,Evidence Quality,80,High evidence for stress resilience and subjective sleep improvement.[27]
+,Ashwagandha,Effect Size,80,Moderate-to-large effect on WASO and sleep efficiency.[37]
+,Ashwagandha,Safety Margin,80,Broad margin but can cause GI upset in sensitive individuals.[38]
+,Ashwagandha,Fasting Compatibility,90,Highly insulin-sensitizing and improves metabolic markers.[39]
+,Ashwagandha,Human Effective Dose Range,70,Standardized extract doses of 120 to 600 mg daily.[40]
+,Ashwagandha,Synergy Potential,70,Moderate synergy requiring careful pairing due to broad effects.
+,Ashwagandha,Contraindications & Interaction Risk,60,Contraindicated in hyperthyroidism and interacts with immunosuppressants.[38]
+,Ashwagandha,Mechanism-of-Action Pathway Links,80,Modulates HPA axis and lowers systemic cortisol.[41]
+,Ashwagandha,Hallmarks of Aging Impact Vector,90,Enhances telomerase activity and preserves proteostasis.[41]
+,Ashwagandha,Antagonism Risk,70,Broad systemic effects risk collision with targeted therapies.
+,Ashwagandha,Adverse Event Profile,80,Potential for nausea or drowsiness.[38]
+,Ashwagandha,Timing / Circadian Sensitivity,60,Often used at night but functions well as a daytime adaptogen.
+,Luteolin,Evidence Quality,60,Nascent clinical sleep evidence but strong preclinical models.[28]
+,Luteolin,Effect Size,60,Moderate effect on systemic inflammation reduction.[42]
+,Luteolin,Safety Margin,90,Excellent margin with benign adverse event profile.
+,Luteolin,Fasting Compatibility,99,Fully compatible.
+,Luteolin,Human Effective Dose Range,80,Targeted supplement dosing typically around 50 mg.
+,Luteolin,Synergy Potential,80,High compounding effect with Apigenin for autophagic clearance.[28]
+,Luteolin,Contraindications & Interaction Risk,80,Minimal risks when paired intelligently.
+,Luteolin,Mechanism-of-Action Pathway Links,90,Inhibits NQO2 to actively stimulate AMPK.[28]
+,Luteolin,Hallmarks of Aging Impact Vector,90,Replicates biochemical signatures of caloric restriction via AMPK.[28]
+,Luteolin,Antagonism Risk,90,Zero risk when paired accurately.
+,Luteolin,Adverse Event Profile,90,Negligible side effects.
+,Luteolin,Timing / Circadian Sensitivity,60,Systemic effects do not mandate strict circadian timing.
+,Weighted Blankets,Evidence Quality,70,Steadily climbing empirical support for psychiatric and general use.[43]
+,Weighted Blankets,Effect Size,60,Moderate reductions in Insomnia Severity Index scores.[44]
+,Weighted Blankets,Safety Margin,90,High for healthy adults but contraindicated for severe respiratory issues.[43]
+,Weighted Blankets,Fasting Compatibility,99,Universally compatible.
+,Weighted Blankets,Human Effective Dose Range,0,Not applicable.
+,Weighted Blankets,Synergy Potential,80,Excellent when paired with temperature regulation to offset heat.[11]
+,Weighted Blankets,Contraindications & Interaction Risk,80,Contraindicated for specific mobility or circulatory restrictions.[43]
+,Weighted Blankets,Mechanism-of-Action Pathway Links,60,Activates parasympathetic pathways via deep pressure tactile mechanoreceptors.[43]
+,Weighted Blankets,Hallmarks of Aging Impact Vector,70,Lowers nocturnal cortisol to support proteostasis.
+,Weighted Blankets,Antagonism Risk,99,Free of pathway or molecular antagonism.
+,Weighted Blankets,Adverse Event Profile,90,Manageable profile lacking physiological toxicity.
+,Weighted Blankets,Timing / Circadian Sensitivity,60,Utilized during the sleep phase.
+,No Social Media (1 Hr),Evidence Quality,80,Robust meta-analytical correlations with sleep architecture preservation.[45]
+,No Social Media (1 Hr),Effect Size,60,Pooled effect size of ~0.33 for reducing sleep disturbances.[45]
+,No Social Media (1 Hr),Safety Margin,99,Absolute physiological safety.
+,No Social Media (1 Hr),Fasting Compatibility,99,Universally compatible.
+,No Social Media (1 Hr),Human Effective Dose Range,0,Not applicable.
+,No Social Media (1 Hr),Synergy Potential,80,Pairs seamlessly with cognitive and environmental modalities.
+,No Social Media (1 Hr),Contraindications & Interaction Risk,99,Zero contraindications.
+,No Social Media (1 Hr),Mechanism-of-Action Pathway Links,50,Prevents sympathetic arousal and dopaminergic reward pathway triggering.[46]
+,No Social Media (1 Hr),Hallmarks of Aging Impact Vector,60,Mitigates continuous nocturnal cortisol preventing nutrient sensing deregulation.
+,No Social Media (1 Hr),Antagonism Risk,99,Zero antagonism.
+,No Social Media (1 Hr),Adverse Event Profile,90,Only transient psychological discomfort (FOMO).
+,No Social Media (1 Hr),Timing / Circadian Sensitivity,80,Critical enforcement in the hour preceding sleep.
+,Astragalus Root,Evidence Quality,60,Direct sleep evidence requires more validation; longevity evidence is strong.[47]
+,Astragalus Root,Effect Size,50,Robust effects for metabolic benefits rather than acute sleep onset.[47]
+,Astragalus Root,Safety Margin,90,High safety resulting in a low adverse event profile.[48]
+,Astragalus Root,Fasting Compatibility,90,Potent hypoglycemic agent that lowers fasting plasma glucose.[47]
+,Astragalus Root,Human Effective Dose Range,70,Typical effective doses range from 300 to 500 mg extract.[49]
+,Astragalus Root,Synergy Potential,70,Strong foundational genomic support in longevity stacks.
+,Astragalus Root,Contraindications & Interaction Risk,80,Risk for those on immunosuppressants due to immune stimulation.
+,Astragalus Root,Mechanism-of-Action Pathway Links,80,Regulates hepatic SIRT1-PGC-1a signaling pathway.[47]
+,Astragalus Root,Hallmarks of Aging Impact Vector,80,Direct molecular countermeasure to telomere attrition.[1]
+,Astragalus Root,Antagonism Risk,80,Low risk in balanced formulations.
+,Astragalus Root,Adverse Event Profile,90,Generally benign profile.
+,Astragalus Root,Timing / Circadian Sensitivity,50,Provides systemic baseline support rather than acute nocturnal induction.
+,Melatonin,Evidence Quality,90,High evidence strictly for circadian phase-shifting applications.[50]
+,Melatonin,Effect Size,70,Weak for maintaining sleep architecture but strong for onset latency.[50]
+,Melatonin,Safety Margin,70,Acceptable short-term but megadosing elevates risks of receptor downregulation.
+,Melatonin,Fasting Compatibility,99,Fasting compatible.
+,Melatonin,Human Effective Dose Range,60,Optimal physiological dosing is often exceeded by commercial supplements.
+,Melatonin,Synergy Potential,60,Can cause next-day grogginess when combined heavily with other sedatives.[51]
+,Melatonin,Contraindications & Interaction Risk,80,Interacts with antidepressants anticoagulants and antihypertensives.[52]
+,Melatonin,Mechanism-of-Action Pathway Links,80,Cornerstone of the KEGG Longevity Regulating Pathway.[53]
+,Melatonin,Hallmarks of Aging Impact Vector,70,Potent free radical scavenger protecting mitochondrial integrity.[54]
+,Melatonin,Antagonism Risk,60,High risk of phase-delaying the biological clock if mistimed.
+,Melatonin,Adverse Event Profile,60,Risks of receptor downregulation and next-day cognitive grogginess.
+,Melatonin,Timing / Circadian Sensitivity,99,Mistimed dosing creates severe antagonism with natural rhythms.
+,Valerian Root,Evidence Quality,70,Heterogeneous evidence lacking consensus for chronic insomnia.[55]
+,Valerian Root,Effect Size,60,Small to moderate impact on sleep latency.[56]
+,Valerian Root,Safety Margin,80,Acceptable for short-term use.
+,Valerian Root,Fasting Compatibility,99,Compatible.
+,Valerian Root,Human Effective Dose Range,70,Requires 300 to 600 mg of standardized extract.[56]
+,Valerian Root,Synergy Potential,70,Positive with gentle botanicals but high risk with CNS depressants.[57]
+,Valerian Root,Contraindications & Interaction Risk,50,Synergizes dangerously with barbiturates and benzodiazepines.[57]
+,Valerian Root,Mechanism-of-Action Pathway Links,70,Modulates GABA signaling by inhibiting synaptic cleft breakdown.[58]
+,Valerian Root,Hallmarks of Aging Impact Vector,50,Secondary mitigation of oxidative stress via improved rest.[55]
+,Valerian Root,Antagonism Risk,70,Risk of over-sedation when paired inappropriately.
+,Valerian Root,Adverse Event Profile,70,Notable reports of headache GI upset and hangover effects.[59]
+,Valerian Root,Timing / Circadian Sensitivity,60,Requires pre-bed administration.
+,Sleep Stories,Evidence Quality,60,Relies largely on observational data extrapolated from mindfulness.[60]
+,Sleep Stories,Effect Size,50,Modest effect sizes validating use as an adjunctive therapy.[60]
+,Sleep Stories,Safety Margin,99,Total safety with negligible adverse events.
+,Sleep Stories,Fasting Compatibility,99,Universally compatible.
+,Sleep Stories,Human Effective Dose Range,0,Not applicable.
+,Sleep Stories,Synergy Potential,70,High when layered with environmental optimizations.
+,Sleep Stories,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Sleep Stories,Mechanism-of-Action Pathway Links,50,Leverages narrative pacing to reduce autonomic startle responses.[61]
+,Sleep Stories,Hallmarks of Aging Impact Vector,50,Operates via chronic vagal tone enhancement reducing inflammation.[62]
+,Sleep Stories,Antagonism Risk,99,Zero antagonism.
+,Sleep Stories,Adverse Event Profile,99,Negligible profile.
+,Sleep Stories,Timing / Circadian Sensitivity,60,Utilized at sleep onset.
+,Mouth Taping,Evidence Quality,60,Low to moderate general evidence but specific to mild OSA.[10]
+,Mouth Taping,Effect Size,60,Large for specific mild OSA but negligible or negative for others.[63]
+,Mouth Taping,Safety Margin,60,Narrower margin with risks of claustrophobia and disrupted sleep.[64]
+,Mouth Taping,Fasting Compatibility,99,Universally compatible.
+,Mouth Taping,Human Effective Dose Range,0,Not applicable.
+,Mouth Taping,Synergy Potential,60,Limited by tolerability issues.
+,Mouth Taping,Contraindications & Interaction Risk,40,High risk for severe OSA or anatomical nasal blockages.[64]
+,Mouth Taping,Mechanism-of-Action Pathway Links,60,Increases nitric oxide production in paranasal sinuses.
+,Mouth Taping,Hallmarks of Aging Impact Vector,70,Combats hypoxia-induced genomic instability.
+,Mouth Taping,Antagonism Risk,80,Can conflict with other respiratory interventions.
+,Mouth Taping,Adverse Event Profile,60,Skin irritation and severe disrupted sleep potential.[65]
+,Mouth Taping,Timing / Circadian Sensitivity,60,Used strictly during sleep.
+,Blue Light Blocking,Evidence Quality,60,Mixed clinical evidence showing non-significant latency reductions.[66]
+,Blue Light Blocking,Effect Size,40,Small to negligible pooled effect size in clinical environments.[66]
+,Blue Light Blocking,Safety Margin,99,Perfect safety margin with zero toxicity.
+,Blue Light Blocking,Fasting Compatibility,99,Universally compatible.
+,Blue Light Blocking,Human Effective Dose Range,0,Not applicable.
+,Blue Light Blocking,Synergy Potential,70,High when combined with actual ambient light dimming.
+,Blue Light Blocking,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Blue Light Blocking,Mechanism-of-Action Pathway Links,60,Attempts to prevent photic suppression of melatonin synthesis.[67]
+,Blue Light Blocking,Hallmarks of Aging Impact Vector,60,Theoretically aligned with melatonin preservation.[67]
+,Blue Light Blocking,Antagonism Risk,99,Zero antagonism.
+,Blue Light Blocking,Adverse Event Profile,99,Zero adverse events.
+,Blue Light Blocking,Timing / Circadian Sensitivity,80,Must be deployed in the hours preceding sleep.
+,DeepCell,Evidence Quality,80,High cumulative evidence from clinically validated ingredients.
+,DeepCell,Effect Size,90,Large synergistic impact on sleep latency and architecture.
+,DeepCell,Safety Margin,90,Broad safety with optimized trace physiological doses.
+,DeepCell,Fasting Compatibility,90,Insulin-sensitizing and completely safe for fasting regimens.
+,DeepCell,Human Effective Dose Range,90,Meticulously balanced doses across 13 active ingredients.
+,DeepCell,Synergy Potential,99,Maximum synergy via orthogonal biological pathways.
+,DeepCell,Contraindications & Interaction Risk,80,Low risk but botanical components require care with certain pharmaceuticals.
+,DeepCell,Mechanism-of-Action Pathway Links,99,"Targets GABA, serotonin, and autophagy pathways comprehensively."
+,DeepCell,Hallmarks of Aging Impact Vector,99,Specifically targets 8 distinct cellular aging hallmarks.
+,DeepCell,Antagonism Risk,90,Formulated explicitly to avoid pathway collision.
+,DeepCell,Adverse Event Profile,90,Negligible morning grogginess or hangover effects.
+,DeepCell,Timing / Circadian Sensitivity,90,Optimized strictly for nocturnal PM administration.
+,CBT-I,Evidence Quality,99,Consensus first-line treatment with flawless clinical validation.
+,CBT-I,Effect Size,99,Large durable effects on sleep latency and efficiency.
+,CBT-I,Safety Margin,99,Practically infinite safety as a non-pharmacological intervention.
+,CBT-I,Fasting Compatibility,99,Universally compatible requiring no ingestion.
+,CBT-I,Human Effective Dose Range,0,Not applicable for behavioral intervention.
+,CBT-I,Synergy Potential,90,Behavioral scaffold that pairs with all nutraceuticals.
+,CBT-I,Contraindications & Interaction Risk,99,Zero interaction risk with pharmaceuticals.
+,CBT-I,Mechanism-of-Action Pathway Links,50,Operates via psychological neuroplasticity and autonomic arousal reduction.
+,CBT-I,Hallmarks of Aging Impact Vector,70,Indirectly halts oxidative stress by consolidating sleep.
+,CBT-I,Antagonism Risk,99,Zero pathway competition with other modalities.
+,CBT-I,Adverse Event Profile,99,Zero adverse event severity.
+,CBT-I,Timing / Circadian Sensitivity,80,Requires rigid adherence to specific wake-times.
+,Morning Sunlight,Evidence Quality,90,Exceptionally high validation across diverse global populations.
+,Morning Sunlight,Effect Size,70,Moderate but significant effect on sleep midpoint alignment.
+,Morning Sunlight,Safety Margin,90,High safety if dermatological UV limits are respected.
+,Morning Sunlight,Fasting Compatibility,99,Universally compatible.
+,Morning Sunlight,Human Effective Dose Range,0,Not applicable.
+,Morning Sunlight,Synergy Potential,80,Pairs perfectly with evening light reduction strategies.
+,Morning Sunlight,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Morning Sunlight,Mechanism-of-Action Pathway Links,90,Directly activates suprachiasmatic nucleus via ipRGCs.
+,Morning Sunlight,Hallmarks of Aging Impact Vector,80,Combats deregulated nutrient sensing and stabilizes circadian clock.
+,Morning Sunlight,Antagonism Risk,99,No molecular antagonism.
+,Morning Sunlight,Adverse Event Profile,99,Negligible risk unless overexposed to UV.
+,Morning Sunlight,Timing / Circadian Sensitivity,99,Critical dependency on early biological day exposure.
+,Temperature Regulation,Evidence Quality,80,Universally accepted evidence for facilitating sleep onset.
+,Temperature Regulation,Effect Size,70,Consistent reduction in latency varying by baseline metabolic rate.
+,Temperature Regulation,Safety Margin,99,Expansive margin with zero toxicity risk.
+,Temperature Regulation,Fasting Compatibility,99,Universally compatible.
+,Temperature Regulation,Human Effective Dose Range,0,Not applicable.
+,Temperature Regulation,Synergy Potential,90,Essential pairing with weighted blankets to offset heat retention.
+,Temperature Regulation,Contraindications & Interaction Risk,99,Zero risk of drug interactions.
+,Temperature Regulation,Mechanism-of-Action Pathway Links,70,Initiates REM sleep thermal window via PO neurons.
+,Temperature Regulation,Hallmarks of Aging Impact Vector,80,Prevents hyperthermia-accelerated loss of proteostasis.
+,Temperature Regulation,Antagonism Risk,99,Zero antagonism risk.
+,Temperature Regulation,Adverse Event Profile,99,Only triggers if temperatures fall to shivering thresholds.
+,Temperature Regulation,Timing / Circadian Sensitivity,80,Requires cooling specifically during the sleep phase.
+,Magnesium Glycinate,Evidence Quality,90,High clinical validation for subjective sleep and metabolic markers.
+,Magnesium Glycinate,Effect Size,80,Impressive effects on glycemic control and mild sedation.
+,Magnesium Glycinate,Safety Margin,90,Excellent safety margin with intact renal function.
+,Magnesium Glycinate,Fasting Compatibility,99,Lowers fasting plasma glucose making it highly compatible.
+,Magnesium Glycinate,Human Effective Dose Range,90,Standardized effective dose spans 100 to 350 mg.
+,Magnesium Glycinate,Synergy Potential,90,Vast complementary effects with L-theanine and apigenin.
+,Magnesium Glycinate,Contraindications & Interaction Risk,90,Minimal risk but competes with zinc for absorption.
+,Magnesium Glycinate,Mechanism-of-Action Pathway Links,80,Antagonizes NMDA and acts as GABA agonist.
+,Magnesium Glycinate,Hallmarks of Aging Impact Vector,80,Addresses deregulated nutrient sensing via ATP-sensitive K channels.
+,Magnesium Glycinate,Antagonism Risk,90,Low risk of pathway collision.
+,Magnesium Glycinate,Adverse Event Profile,90,Very low side-effect profile.
+,Magnesium Glycinate,Timing / Circadian Sensitivity,70,Effective pre-bedtime but flexible.
+,NSDR / Yoga Nidra,Evidence Quality,80,Moderate to high clinical evidence for autonomic balance.
+,NSDR / Yoga Nidra,Effect Size,80,Clinically profound for accelerating sleep onset.
+,NSDR / Yoga Nidra,Safety Margin,99,Absolute safety with non-existent toxicity.
+,NSDR / Yoga Nidra,Fasting Compatibility,99,Universally compatible.
+,NSDR / Yoga Nidra,Human Effective Dose Range,0,Not applicable.
+,NSDR / Yoga Nidra,Synergy Potential,90,Pairs with all modalities and can be deployed mid-day.
+,NSDR / Yoga Nidra,Contraindications & Interaction Risk,99,Zero risk of pharmaceutical interactions.
+,NSDR / Yoga Nidra,Mechanism-of-Action Pathway Links,60,Downshifts EEG activity from beta to alpha/theta waves.
+,NSDR / Yoga Nidra,Hallmarks of Aging Impact Vector,80,Reduces molecular drivers of inflammaging by lowering cortisol.
+,NSDR / Yoga Nidra,Antagonism Risk,99,Zero pathway collision risk.
+,NSDR / Yoga Nidra,Adverse Event Profile,99,Negligible adverse events.
+,NSDR / Yoga Nidra,Timing / Circadian Sensitivity,60,Highly versatile for both daytime and nocturnal use.
+,L-Theanine,Evidence Quality,80,Solid evidence for reducing stress and improving subjective sleep.
+,L-Theanine,Effect Size,70,Moderate effect size for relaxation and attention.
+,L-Theanine,Safety Margin,99,Exceptionally high NOAEL with minimal toxicity.
+,L-Theanine,Fasting Compatibility,99,Non-insulinogenic and entirely compatible.
+,L-Theanine,Human Effective Dose Range,80,Standardized effective dose of 100 to 200 mg.
+,L-Theanine,Synergy Potential,80,Highly synergistic with magnesium and flavonoids.
+,L-Theanine,Contraindications & Interaction Risk,90,Lacks severe interaction risks.
+,L-Theanine,Mechanism-of-Action Pathway Links,80,Increases GABAergic expression and alpha brain waves.
+,L-Theanine,Hallmarks of Aging Impact Vector,80,Suppresses AGEs and upregulates FoxO1 transcription factor.
+,L-Theanine,Antagonism Risk,90,Minimal risk of competing with other relaxation pathways.
+,L-Theanine,Adverse Event Profile,99,Rare reports of mild headache.
+,L-Theanine,Timing / Circadian Sensitivity,60,Can be used daytime or nighttime for relaxed alertness.
+,Apigenin,Evidence Quality,70,Anecdotal efficacy high but isolated clinical insomnia trials are developing.
+,Apigenin,Effect Size,70,Moderate effects on systemic inflammation and anxiety reduction.
+,Apigenin,Safety Margin,90,High margin with no significant toxicity at standard doses.
+,Apigenin,Fasting Compatibility,99,Fully compatible and supports metabolic health.
+,Apigenin,Human Effective Dose Range,80,Standard targeted dose of 50 mg utilized in longevity protocols.
+,Apigenin,Synergy Potential,80,Maximizes autophagic cascade when combined with Luteolin.
+,Apigenin,Contraindications & Interaction Risk,80,Slight risk via hepatic enzyme inhibition with certain drugs.
+,Apigenin,Mechanism-of-Action Pathway Links,90,Direct CD38 inhibitor preserving intracellular NAD pools.
+,Apigenin,Hallmarks of Aging Impact Vector,90,Directly supports Sirtuin activity and initiates autophagy.
+,Apigenin,Antagonism Risk,90,Low risk when intelligently stacked.
+,Apigenin,Adverse Event Profile,99,Extremely low side-effect profile at appropriate doses.
+,Apigenin,Timing / Circadian Sensitivity,60,Flexible but optimal pre-bed for GABA-A anxiolytic effects.
+,Dim Lights Before Bed,Evidence Quality,90,Bedrock of modern sleep hygiene with exceptional validation.
+,Dim Lights Before Bed,Effect Size,70,Substantial impact on aligning the circadian phase.
+,Dim Lights Before Bed,Safety Margin,99,Absolute safety.
+,Dim Lights Before Bed,Fasting Compatibility,99,Universally compatible.
+,Dim Lights Before Bed,Human Effective Dose Range,0,Not applicable.
+,Dim Lights Before Bed,Synergy Potential,80,Essential foundation for all other circadian interventions.
+,Dim Lights Before Bed,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Dim Lights Before Bed,Mechanism-of-Action Pathway Links,70,Permits unhindered degradation of PER and CRY proteins.
+,Dim Lights Before Bed,Hallmarks of Aging Impact Vector,70,Defends natural melatonin surge preventing mitochondrial dysfunction.
+,Dim Lights Before Bed,Antagonism Risk,99,Zero antagonism risk.
+,Dim Lights Before Bed,Adverse Event Profile,99,Lacks any adverse event profile.
+,Dim Lights Before Bed,Timing / Circadian Sensitivity,90,Must commence 90 to 120 minutes prior to sleep onset.
+,Trace Lithium Orotate,Evidence Quality,70,Accelerating evidence for cognitive stabilization at trace doses.
+,Trace Lithium Orotate,Effect Size,70,Moderate effect on longevity and cognitive preservation.
+,Trace Lithium Orotate,Safety Margin,90,Expertly avoids renal/thyroid toxicities of psychiatric megadosing.
+,Trace Lithium Orotate,Fasting Compatibility,99,Fully compatible.
+,Trace Lithium Orotate,Human Effective Dose Range,80,Optimal trace element dosing spans 1 to 5 mg daily.
+,Trace Lithium Orotate,Synergy Potential,80,Excellent when combined with other autophagy inducers.
+,Trace Lithium Orotate,Contraindications & Interaction Risk,70,Theoretical caution with potent serotonergic agents.
+,Trace Lithium Orotate,Mechanism-of-Action Pathway Links,90,Direct inhibitor of GSK-3 beta regulatory kinase.
+,Trace Lithium Orotate,Hallmarks of Aging Impact Vector,90,Stimulates autophagy and clears neurotoxic protein aggregates.
+,Trace Lithium Orotate,Antagonism Risk,80,Competes with magnesium at high doses but safe at trace levels.
+,Trace Lithium Orotate,Adverse Event Profile,90,Negligible side effects at microdose concentrations.
+,Trace Lithium Orotate,Timing / Circadian Sensitivity,60,Flexible timing due to systemic neuroprotective mechanisms.
+,Ashwagandha,Evidence Quality,80,High evidence for stress resilience and subjective sleep improvement.
+,Ashwagandha,Effect Size,80,Moderate-to-large effect on WASO and sleep efficiency.
+,Ashwagandha,Safety Margin,80,Broad margin but can cause GI upset in sensitive individuals.
+,Ashwagandha,Fasting Compatibility,90,Highly insulin-sensitizing and improves metabolic markers.
+,Ashwagandha,Human Effective Dose Range,70,Standardized extract doses of 120 to 600 mg daily.
+,Ashwagandha,Synergy Potential,70,Moderate synergy requiring careful pairing due to broad effects.
+,Ashwagandha,Contraindications & Interaction Risk,60,Contraindicated in hyperthyroidism and interacts with immunosuppressants.
+,Ashwagandha,Mechanism-of-Action Pathway Links,80,Modulates HPA axis and lowers systemic cortisol.
+,Ashwagandha,Hallmarks of Aging Impact Vector,90,Enhances telomerase activity and preserves proteostasis.
+,Ashwagandha,Antagonism Risk,70,Broad systemic effects risk collision with targeted therapies.
+,Ashwagandha,Adverse Event Profile,80,Potential for nausea or drowsiness.
+,Ashwagandha,Timing / Circadian Sensitivity,60,Often used at night but functions well as a daytime adaptogen.
+,Luteolin,Evidence Quality,60,Nascent clinical sleep evidence but strong preclinical models.
+,Luteolin,Effect Size,60,Moderate effect on systemic inflammation reduction.
+,Luteolin,Safety Margin,90,Excellent margin with benign adverse event profile.
+,Luteolin,Fasting Compatibility,99,Fully compatible.
+,Luteolin,Human Effective Dose Range,80,Targeted supplement dosing typically around 50 mg.
+,Luteolin,Synergy Potential,80,High compounding effect with Apigenin for autophagic clearance.
+,Luteolin,Contraindications & Interaction Risk,80,Minimal risks when paired intelligently.
+,Luteolin,Mechanism-of-Action Pathway Links,90,Inhibits NQO2 to actively stimulate AMPK.
+,Luteolin,Hallmarks of Aging Impact Vector,90,Replicates biochemical signatures of caloric restriction via AMPK.
+,Luteolin,Antagonism Risk,90,Zero risk when paired accurately.
+,Luteolin,Adverse Event Profile,90,Negligible side effects.
+,Luteolin,Timing / Circadian Sensitivity,60,Systemic effects do not mandate strict circadian timing.
+,Weighted Blankets,Evidence Quality,70,Steadily climbing empirical support for psychiatric and general use.
+,Weighted Blankets,Effect Size,60,Moderate reductions in Insomnia Severity Index scores.
+,Weighted Blankets,Safety Margin,90,High for healthy adults but contraindicated for severe respiratory issues.
+,Weighted Blankets,Fasting Compatibility,99,Universally compatible.
+,Weighted Blankets,Human Effective Dose Range,0,Not applicable.
+,Weighted Blankets,Synergy Potential,80,Excellent when paired with temperature regulation to offset heat.
+,Weighted Blankets,Contraindications & Interaction Risk,80,Contraindicated for specific mobility or circulatory restrictions.
+,Weighted Blankets,Mechanism-of-Action Pathway Links,60,Activates parasympathetic pathways via deep pressure tactile mechanoreceptors.
+,Weighted Blankets,Hallmarks of Aging Impact Vector,70,Lowers nocturnal cortisol to support proteostasis.
+,Weighted Blankets,Antagonism Risk,99,Free of pathway or molecular antagonism.
+,Weighted Blankets,Adverse Event Profile,90,Manageable profile lacking physiological toxicity.
+,Weighted Blankets,Timing / Circadian Sensitivity,60,Utilized during the sleep phase.
+,No Social Media (1 Hr),Evidence Quality,80,Robust meta-analytical correlations with sleep architecture preservation.
+,No Social Media (1 Hr),Effect Size,60,Pooled effect size of ~0.33 for reducing sleep disturbances.
+,No Social Media (1 Hr),Safety Margin,99,Absolute physiological safety.
+,No Social Media (1 Hr),Fasting Compatibility,99,Universally compatible.
+,No Social Media (1 Hr),Human Effective Dose Range,0,Not applicable.
+,No Social Media (1 Hr),Synergy Potential,80,Pairs seamlessly with cognitive and environmental modalities.
+,No Social Media (1 Hr),Contraindications & Interaction Risk,99,Zero contraindications.
+,No Social Media (1 Hr),Mechanism-of-Action Pathway Links,50,Prevents sympathetic arousal and dopaminergic reward pathway triggering.
+,No Social Media (1 Hr),Hallmarks of Aging Impact Vector,60,Mitigates continuous nocturnal cortisol preventing nutrient sensing deregulation.
+,No Social Media (1 Hr),Antagonism Risk,99,Zero antagonism.
+,No Social Media (1 Hr),Adverse Event Profile,90,Only transient psychological discomfort (FOMO).
+,No Social Media (1 Hr),Timing / Circadian Sensitivity,80,Critical enforcement in the hour preceding sleep.
+,Astragalus Root,Evidence Quality,60,Direct sleep evidence requires more validation; longevity evidence is strong.
+,Astragalus Root,Effect Size,50,Robust effects for metabolic benefits rather than acute sleep onset.
+,Astragalus Root,Safety Margin,90,High safety resulting in a low adverse event profile.
+,Astragalus Root,Fasting Compatibility,90,Potent hypoglycemic agent that lowers fasting plasma glucose.
+,Astragalus Root,Human Effective Dose Range,70,Typical effective doses range from 300 to 500 mg extract.
+,Astragalus Root,Synergy Potential,70,Strong foundational genomic support in longevity stacks.
+,Astragalus Root,Contraindications & Interaction Risk,80,Risk for those on immunosuppressants due to immune stimulation.
+,Astragalus Root,Mechanism-of-Action Pathway Links,80,Regulates hepatic SIRT1-PGC-1a signaling pathway.
+,Astragalus Root,Hallmarks of Aging Impact Vector,80,Direct molecular countermeasure to telomere attrition.
+,Astragalus Root,Antagonism Risk,80,Low risk in balanced formulations.
+,Astragalus Root,Adverse Event Profile,90,Generally benign profile.
+,Astragalus Root,Timing / Circadian Sensitivity,50,Provides systemic baseline support rather than acute nocturnal induction.
+,Melatonin,Evidence Quality,90,High evidence strictly for circadian phase-shifting applications.
+,Melatonin,Effect Size,70,Weak for maintaining sleep architecture but strong for onset latency.
+,Melatonin,Safety Margin,70,Acceptable short-term but megadosing elevates risks of receptor downregulation.
+,Melatonin,Fasting Compatibility,99,Fasting compatible.
+,Melatonin,Human Effective Dose Range,60,Optimal physiological dosing is often exceeded by commercial supplements.
+,Melatonin,Synergy Potential,60,Can cause next-day grogginess when combined heavily with other sedatives.
+,Melatonin,Contraindications & Interaction Risk,80,Interacts with antidepressants anticoagulants and antihypertensives.
+,Melatonin,Mechanism-of-Action Pathway Links,80,Cornerstone of the KEGG Longevity Regulating Pathway.
+,Melatonin,Hallmarks of Aging Impact Vector,70,Potent free radical scavenger protecting mitochondrial integrity.
+,Melatonin,Antagonism Risk,60,High risk of phase-delaying the biological clock if mistimed.
+,Melatonin,Adverse Event Profile,60,Risks of receptor downregulation and next-day cognitive grogginess.
+,Melatonin,Timing / Circadian Sensitivity,99,Mistimed dosing creates severe antagonism with natural rhythms.
+,Valerian Root,Evidence Quality,70,Heterogeneous evidence lacking consensus for chronic insomnia.
+,Valerian Root,Effect Size,60,Small to moderate impact on sleep latency.
+,Valerian Root,Safety Margin,80,Acceptable for short-term use.
+,Valerian Root,Fasting Compatibility,99,Compatible.
+,Valerian Root,Human Effective Dose Range,70,Requires 300 to 600 mg of standardized extract.
+,Valerian Root,Synergy Potential,70,Positive with gentle botanicals but high risk with CNS depressants.
+,Valerian Root,Contraindications & Interaction Risk,50,Synergizes dangerously with barbiturates and benzodiazepines.
+,Valerian Root,Mechanism-of-Action Pathway Links,70,Modulates GABA signaling by inhibiting synaptic cleft breakdown.
+,Valerian Root,Hallmarks of Aging Impact Vector,50,Secondary mitigation of oxidative stress via improved rest.
+,Valerian Root,Antagonism Risk,70,Risk of over-sedation when paired inappropriately.
+,Valerian Root,Adverse Event Profile,70,Notable reports of headache GI upset and hangover effects.
+,Valerian Root,Timing / Circadian Sensitivity,60,Requires pre-bed administration.
+,Sleep Stories,Evidence Quality,60,Relies largely on observational data extrapolated from mindfulness.
+,Sleep Stories,Effect Size,50,Modest effect sizes validating use as an adjunctive therapy.
+,Sleep Stories,Safety Margin,99,Total safety with negligible adverse events.
+,Sleep Stories,Fasting Compatibility,99,Universally compatible.
+,Sleep Stories,Human Effective Dose Range,0,Not applicable.
+,Sleep Stories,Synergy Potential,70,High when layered with environmental optimizations.
+,Sleep Stories,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Sleep Stories,Mechanism-of-Action Pathway Links,50,Leverages narrative pacing to reduce autonomic startle responses.
+,Sleep Stories,Hallmarks of Aging Impact Vector,50,Operates via chronic vagal tone enhancement reducing inflammation.
+,Sleep Stories,Antagonism Risk,99,Zero antagonism.
+,Sleep Stories,Adverse Event Profile,99,Negligible profile.
+,Sleep Stories,Timing / Circadian Sensitivity,60,Utilized at sleep onset.
+,Mouth Taping,Evidence Quality,60,Low to moderate general evidence but specific to mild OSA.
+,Mouth Taping,Effect Size,60,Large for specific mild OSA but negligible or negative for others.
+,Mouth Taping,Safety Margin,60,Narrower margin with risks of claustrophobia and disrupted sleep.
+,Mouth Taping,Fasting Compatibility,99,Universally compatible.
+,Mouth Taping,Human Effective Dose Range,0,Not applicable.
+,Mouth Taping,Synergy Potential,60,Limited by tolerability issues.
+,Mouth Taping,Contraindications & Interaction Risk,40,High risk for severe OSA or anatomical nasal blockages.
+,Mouth Taping,Mechanism-of-Action Pathway Links,60,Increases nitric oxide production in paranasal sinuses.
+,Mouth Taping,Hallmarks of Aging Impact Vector,70,Combats hypoxia-induced genomic instability.
+,Mouth Taping,Antagonism Risk,80,Can conflict with other respiratory interventions.
+,Mouth Taping,Adverse Event Profile,60,Skin irritation and severe disrupted sleep potential.
+,Mouth Taping,Timing / Circadian Sensitivity,60,Used strictly during sleep.
+,Blue Light Blocking,Evidence Quality,60,Mixed clinical evidence showing non-significant latency reductions.
+,Blue Light Blocking,Effect Size,40,Small to negligible pooled effect size in clinical environments.
+,Blue Light Blocking,Safety Margin,99,Perfect safety margin with zero toxicity.
+,Blue Light Blocking,Fasting Compatibility,99,Universally compatible.
+,Blue Light Blocking,Human Effective Dose Range,0,Not applicable.
+,Blue Light Blocking,Synergy Potential,70,High when combined with actual ambient light dimming.
+,Blue Light Blocking,Contraindications & Interaction Risk,99,Zero interaction risk.
+,Blue Light Blocking,Mechanism-of-Action Pathway Links,60,Attempts to prevent photic suppression of melatonin synthesis.
+,Blue Light Blocking,Hallmarks of Aging Impact Vector,60,Theoretically aligned with melatonin preservation.
+,Blue Light Blocking,Antagonism Risk,99,Zero antagonism.
+,Blue Light Blocking,Adverse Event Profile,99,Zero adverse events.
+,Blue Light Blocking,Timing / Circadian Sensitivity,80,Must be deployed in the hours preceding sleep.
+,Tart Cherry Juice,Evidence Quality,80,Significant improvements reported in sleep duration and efficiency.
+,Tart Cherry Juice,Effect Size,70,Moderate effect on sleep onset and total sleep time.
+,Tart Cherry Juice,Safety Margin,90,Generally very safe as a food-based intervention.
+,Tart Cherry Juice,Fasting Compatibility,20,"Contains sugar and calories, which breaks a fast and triggers an insulin response."
+,Tart Cherry Juice,Human Effective Dose Range,80,Typically up to 16 ounces of juice or 480 mg of extract daily.
+,Tart Cherry Juice,Synergy Potential,70,Provides natural melatonin and tryptophan to stack with other modalities.
+,Tart Cherry Juice,Contraindications & Interaction Risk,80,May interact with certain medications like blood thinners.
+,Tart Cherry Juice,Mechanism-of-Action Pathway Links,80,Contains endogenous melatonin and anthocyanins that reduce inflammation.
+,Tart Cherry Juice,Hallmarks of Aging Impact Vector,80,Reduces oxidative stress and inflammatory markers.
+,Tart Cherry Juice,Antagonism Risk,80,Minimal risk of competing with other sleep supplements.
+,Tart Cherry Juice,Adverse Event Profile,85,Sorbitol content can cause stomach upset in some individuals.
+,Tart Cherry Juice,Timing / Circadian Sensitivity,80,Best consumed about an hour before bedtime.
+,Myo-Inositol,Evidence Quality,70,Emerging clinical evidence for sleep and anxiety reduction.
+,Myo-Inositol,Effect Size,70,Calms neuronal activity and eases the transition into sleep.[1]
+,Myo-Inositol,Safety Margin,95,High safety profile with few reported side effects.
+,Myo-Inositol,Fasting Compatibility,80,Mildly sweet but used to improve insulin sensitivity.
+,Myo-Inositol,Human Effective Dose Range,80,Typically dosed around 900 mg for sleep support.[1]
+,Myo-Inositol,Synergy Potential,90,Synergizes excellently with magnesium and L-theanine in sleep stacks.[1]
+,Myo-Inositol,Contraindications & Interaction Risk,90,Very low risk of medication interactions.
+,Myo-Inositol,Mechanism-of-Action Pathway Links,80,Supports healthy serotonin activity and circadian rhythm balance.[1]
+,Myo-Inositol,Hallmarks of Aging Impact Vector,70,Indirectly supports metabolic homeostasis.
+,Myo-Inositol,Antagonism Risk,90,Low risk of pathway competition.
+,Myo-Inositol,Adverse Event Profile,95,Generally well tolerated even at high doses.
+,Myo-Inositol,Timing / Circadian Sensitivity,80,Taken 30 to 60 minutes before sleep.[1]
+,GABA Supplementation,Evidence Quality,70,Moderate evidence due to debates over blood-brain barrier permeability.
+,GABA Supplementation,Effect Size,60,Improves subjective sleep architecture in clinical settings.
+,GABA Supplementation,Safety Margin,90,Safe with a broad therapeutic window.
+,GABA Supplementation,Fasting Compatibility,99,Amino acid that does not break a fast.
+,GABA Supplementation,Human Effective Dose Range,70,Typically ranges from 100 to 300 mg.
+,GABA Supplementation,Synergy Potential,80,Stacks well with other calming amino acids and minerals.
+,GABA Supplementation,Contraindications & Interaction Risk,80,Caution when combined with prescription CNS depressants.
+,GABA Supplementation,Mechanism-of-Action Pathway Links,80,Regulates sleep via the gut-brain axis and vagal nerve pathways.
+,GABA Supplementation,Hallmarks of Aging Impact Vector,60,Indirect benefits via improved sleep quality.
+,GABA Supplementation,Antagonism Risk,80,Can be redundant if stacked with too many GABAergic botanicals.
+,GABA Supplementation,Adverse Event Profile,90,Mild tingling or shortness of breath at very high doses.
+,GABA Supplementation,Timing / Circadian Sensitivity,80,Administered prior to sleep.
+,Phosphatidylserine,Evidence Quality,70,Well documented for blunting stress responses and cortisol.
+,Phosphatidylserine,Effect Size,70,Particularly effective for stress-induced insomnia.
+,Phosphatidylserine,Safety Margin,95,Naturally occurring phospholipid with high safety.
+,Phosphatidylserine,Fasting Compatibility,90,"Usually extracted from soy or sunflower, minimal metabolic impact."
+,Phosphatidylserine,Human Effective Dose Range,80,Effective in the 100 to 300 mg range.
+,Phosphatidylserine,Synergy Potential,80,Great complementary effect with adaptogens.
+,Phosphatidylserine,Contraindications & Interaction Risk,90,No major known drug interactions.
+,Phosphatidylserine,Mechanism-of-Action Pathway Links,80,Directly blunts HPA axis hyperactivation and lowers cortisol.
+,Phosphatidylserine,Hallmarks of Aging Impact Vector,70,Supports cellular membrane integrity.
+,Phosphatidylserine,Antagonism Risk,90,No known pathway collisions.
+,Phosphatidylserine,Adverse Event Profile,95,Negligible side effects.
+,Phosphatidylserine,Timing / Circadian Sensitivity,70,Can be taken during the day or at night depending on cortisol spikes.
+,Rhodiola Rosea,Evidence Quality,80,Strong evidence as an adaptogen for stress fatigue.
+,Rhodiola Rosea,Effect Size,70,Moderate effect on reducing perceived stress.
+,Rhodiola Rosea,Safety Margin,85,Generally safe but dosing must be managed.
+,Rhodiola Rosea,Fasting Compatibility,95,Does not break a fast.
+,Rhodiola Rosea,Human Effective Dose Range,80,Usually 100 to 400 mg of standardized extract.
+,Rhodiola Rosea,Synergy Potential,70,Pairs well with other daytime adaptogens.
+,Rhodiola Rosea,Contraindications & Interaction Risk,70,Mild MAOI properties; caution with SSRIs or stimulants.
+,Rhodiola Rosea,Mechanism-of-Action Pathway Links,80,Modulates stress hormone release.
+,Rhodiola Rosea,Hallmarks of Aging Impact Vector,80,Supports mitochondrial function and stress resilience.
+,Rhodiola Rosea,Antagonism Risk,70,Can be overly stimulating if taken with caffeine.
+,Rhodiola Rosea,Adverse Event Profile,80,Can cause jitteriness if overdosed.
+,Rhodiola Rosea,Timing / Circadian Sensitivity,40,"Highly stimulating; poor choice for pre-bed, better used in the morning."
+,Glycine,Evidence Quality,80,Clinical trials demonstrate improved sleep latency and reduced morning fatigue.
+,Glycine,Effect Size,70,Moderate improvements in objective sleep quality.
+,Glycine,Safety Margin,95,Endogenous amino acid with an extremely high safety ceiling.
+,Glycine,Fasting Compatibility,90,"Safe for fasting, non-insulinogenic."
+,Glycine,Human Effective Dose Range,80,Clinically effective at 3 grams before bed.
+,Glycine,Synergy Potential,90,Perfect stack addition alongside magnesium.
+,Glycine,Contraindications & Interaction Risk,95,Virtually zero drug interactions.
+,Glycine,Mechanism-of-Action Pathway Links,85,Acts as an NMDA co-agonist and actively lowers core body temperature.
+,Glycine,Hallmarks of Aging Impact Vector,70,Supports collagen synthesis and proteostasis.
+,Glycine,Antagonism Risk,90,Highly compatible with other sleep molecules.
+,Glycine,Adverse Event Profile,95,Extremely rare side effects; mild GI issues at massive doses.
+,Glycine,Timing / Circadian Sensitivity,90,Specifically timed 30 to 60 minutes before sleep.
+,Warm Bath (Passive Body Heating),Evidence Quality,90,Extensive thermoregulatory data supports sleep induction.
+,Warm Bath (Passive Body Heating),Effect Size,80,Large effect on sleep onset latency due to temperature shift.
+,Warm Bath (Passive Body Heating),Safety Margin,95,Completely safe for the general population.
+,Warm Bath (Passive Body Heating),Fasting Compatibility,99,Requires no ingestion.
+,Warm Bath (Passive Body Heating),Human Effective Dose Range,0,Not applicable.
+,Warm Bath (Passive Body Heating),Synergy Potential,90,Synergizes perfectly with bedroom cooling and weighted blankets.
+,Warm Bath (Passive Body Heating),Contraindications & Interaction Risk,90,Caution only for severe cardiovascular or neuropathy patients.
+,Warm Bath (Passive Body Heating),Mechanism-of-Action Pathway Links,90,Forces peripheral vasodilation which rapidly drops core body temperature.
+,Warm Bath (Passive Body Heating),Hallmarks of Aging Impact Vector,60,Indirect longevity benefits through improved sleep architecture.
+,Warm Bath (Passive Body Heating),Antagonism Risk,90,No molecular antagonism.
+,Warm Bath (Passive Body Heating),Adverse Event Profile,95,Zero side effects unless water is dangerously hot.
+,Warm Bath (Passive Body Heating),Timing / Circadian Sensitivity,90,Must be done 1 to 2 hours before bed to allow core cooling.
+,Lavender Aromatherapy,Evidence Quality,70,Numerous small trials show mild efficacy.
+,Lavender Aromatherapy,Effect Size,50,Small subjective effect on relaxation and sleep quality.
+,Lavender Aromatherapy,Safety Margin,95,Extremely safe when inhaled.
+,Lavender Aromatherapy,Fasting Compatibility,99,Inhalation does not break a fast.
+,Lavender Aromatherapy,Human Effective Dose Range,0,Not applicable for olfaction.
+,Lavender Aromatherapy,Synergy Potential,80,Great ambient addition to sleep stories or NSDR.
+,Lavender Aromatherapy,Contraindications & Interaction Risk,95,No known pharmaceutical interactions.
+,Lavender Aromatherapy,Mechanism-of-Action Pathway Links,70,Olfactory stimulation connects to limbic system inducing parasympathetic shift.
+,Lavender Aromatherapy,Hallmarks of Aging Impact Vector,50,Only indirect benefits via stress reduction.
+,Lavender Aromatherapy,Antagonism Risk,95,Does not compete with internal biochemicals.
+,Lavender Aromatherapy,Adverse Event Profile,95,Only a risk if allergic or sensitive to fragrances.
+,Lavender Aromatherapy,Timing / Circadian Sensitivity,80,Best used in the bedroom environment overnight.
+,Pink Noise,Evidence Quality,70,Emerging acoustic research showing slow-wave sleep enhancement.[2]
+,Pink Noise,Effect Size,60,Moderate effect on deepening slow-wave sleep phases.
+,Pink Noise,Safety Margin,99,Absolute physiological safety.
+,Pink Noise,Fasting Compatibility,99,Acoustic intervention.
+,Pink Noise,Human Effective Dose Range,0,Not applicable.
+,Pink Noise,Synergy Potential,90,Excellent environmental pairing with dim lights and cooling.
+,Pink Noise,Contraindications & Interaction Risk,99,Zero contraindications.
+,Pink Noise,Mechanism-of-Action Pathway Links,80,Encourages parasympathetic dominance by masking unpredictability and lowering autonomic arousal.[2]
+,Pink Noise,Hallmarks of Aging Impact Vector,50,Indirectly supports glymphatic clearance via enhanced slow-wave sleep.
+,Pink Noise,Antagonism Risk,99,Zero antagonism.
+,Pink Noise,Adverse Event Profile,99,Negligible.
+,Pink Noise,Timing / Circadian Sensitivity,90,Played continuously throughout the sleep period.
+,Acupressure Mats,Evidence Quality,60,Limited but growing clinical evidence for sleep and pain.
+,Acupressure Mats,Effect Size,50,Small to moderate effect on muscle tension and relaxation.
+,Acupressure Mats,Safety Margin,90,"Safe for most, but skin must remain unbroken."
+,Acupressure Mats,Fasting Compatibility,99,Physical intervention.
+,Acupressure Mats,Human Effective Dose Range,0,Not applicable.
+,Acupressure Mats,Synergy Potential,80,Pairs well with NSDR or meditation.
+,Acupressure Mats,Contraindications & Interaction Risk,80,Contraindicated for severe skin conditions or those on heavy blood thinners.
+,Acupressure Mats,Mechanism-of-Action Pathway Links,70,Stimulates endorphin release and forces a parasympathetic shift.
+,Acupressure Mats,Hallmarks of Aging Impact Vector,50,Indirectly lowers cortisol.
+,Acupressure Mats,Antagonism Risk,95,No molecular antagonism.
+,Acupressure Mats,Adverse Event Profile,85,Can cause temporary skin discomfort or redness.
+,Acupressure Mats,Timing / Circadian Sensitivity,80,Used for 15-30 minutes before sleep.

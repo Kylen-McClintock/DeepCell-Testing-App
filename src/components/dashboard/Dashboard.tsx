@@ -31,9 +31,16 @@ export default function Dashboard() {
 
     const chartData = useMemo(() => {
         const days = Object.keys(state.daily).sort();
-        const start = state.plan.startDate ? parseDate(state.plan.startDate) : new Date();
-        const isQuick = state.plan.mode === "quick";
-        const baseEnd = isQuick ? addDays(start, -1) : addDays(start, state.plan.baselineDays - 1);
+        
+        let start = new Date();
+        let isQuick = true;
+        let baseEnd = addDays(start, -1);
+        
+        if (state.activeProtocol && state.activeProtocol.startDate) {
+            start = parseDate(state.activeProtocol.startDate);
+            isQuick = state.activeProtocol.mode === "quick";
+            baseEnd = isQuick ? addDays(start, -1) : addDays(start, state.activeProtocol.baselineDays - 1);
+        }
 
         const data: any[] = [];
         const baseVals: number[] = [];
@@ -59,19 +66,24 @@ export default function Dashboard() {
             v = Number(v);
 
             if (Number.isFinite(v)) {
-                let doseColor = "#5c6b7f"; // 0
-                let label = "No Dose";
-                if (r.tookDose === "yes") {
-                    const amt = r.doseAmount || 3;
-                    if (amt <= 1.5) { doseColor = "#0dcaf0"; label = "1 Cap"; }
-                    else if (amt <= 2.5) { doseColor = "#2d5bff"; label = "2 Caps"; }
-                    else if (amt <= 3.5) { doseColor = "#7d5fff"; label = "3 Caps"; }
-                    else { doseColor = "#ffb45e"; label = "4+ Caps"; }
+                let doseColor = "#5c6b7f";
+                let label = "No Protocol / Tracked";
+                
+                let adherenceRatio = 0;
+                
+                if (state.activeProtocol && r.userProtocolId === state.activeProtocol.id) {
+                    const activeModIds = state.activeProtocol.activeModalities.map(m => m.id);
+                    const adheredMods = activeModIds.filter(id => r.adherence?.[id] === true);
+                    adherenceRatio = activeModIds.length > 0 ? adheredMods.length / activeModIds.length : 0;
+                    
+                    if (adherenceRatio === 1) { doseColor = "#0dcaf0"; label = "Followed Protocol"; }
+                    else if (adherenceRatio > 0) { doseColor = "#7d5fff"; label = "Partial Protocol"; }
+                    else { doseColor = "#ffb45e"; label = "Missed Protocol"; }
                 }
 
                 const dt = parseDate(d);
-                const isBase = !isQuick && dt <= baseEnd;
-                const isTest = (dt > baseEnd && r.tookDose === "yes") || (isQuick && dt >= start && r.tookDose === "yes");
+                const isBase = state.activeProtocol && !isQuick && dt <= baseEnd;
+                const isTest = state.activeProtocol && ((dt > baseEnd && adherenceRatio > 0) || (isQuick && dt >= start && adherenceRatio > 0));
 
                 if (isBase) baseVals.push(v);
                 if (isTest) testVals.push(v);
@@ -87,17 +99,17 @@ export default function Dashboard() {
         });
 
         return { data, baseVals, testVals };
-    }, [state.daily, metric, state.plan]);
+    }, [state.daily, metric, state.activeProtocol]);
 
     const kpi = useMemo(() => {
         let mBase;
-        const isQuick = state.plan.mode === "quick";
+        const isQuick = state.activeProtocol?.mode === "quick";
         const [type, key] = metric.split(".");
 
-        if (isQuick) {
-            if (key === "score") mBase = state.plan.estimates.score;
-            else if (key === "wakeUps") mBase = state.plan.estimates.wakeUps;
-            else if (type === "s") mBase = state.plan.estimates[key as keyof typeof state.plan.estimates];
+        if (isQuick && state.activeProtocol) {
+            if (key === "score") mBase = state.activeProtocol.estimates.score;
+            else if (key === "wakeUps") mBase = state.activeProtocol.estimates.wakeUps;
+            else if (type === "s") mBase = state.activeProtocol.estimates[key as keyof typeof state.activeProtocol.estimates];
             else mBase = "";
 
             mBase = mBase === "" ? NaN : Number(mBase);
@@ -112,7 +124,7 @@ export default function Dashboard() {
             diff: mTest - mBase,
             baseLabel: isQuick ? "Estimated" : "Calculated"
         };
-    }, [chartData, metric, state.plan]);
+    }, [chartData, metric, state.activeProtocol]);
 
     const CustomDot = (props: any) => {
         const { cx, cy, payload } = props;
@@ -136,16 +148,6 @@ export default function Dashboard() {
                             <option key={k} value={k}>{v.label}</option>
                         ))}
                     </select>
-                </div>
-                <div className="w-[80px]">
-                    <label className="block text-xs text-[var(--muted)] mb-1">Smooth</label>
-                    <input
-                        type="number"
-                        min="1"
-                        className="input-field py-1"
-                        value={smoothN}
-                        onChange={(e) => setSmoothN(Number(e.target.value))}
-                    />
                 </div>
             </div>
 
@@ -176,22 +178,21 @@ export default function Dashboard() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-3 text-[11px] text-[var(--muted)] mb-4">
-                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#5c6b7f] mr-1.5"></span>0 Caps</div>
-                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#0dcaf0] mr-1.5"></span>1 Cap (Lite)</div>
-                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#2d5bff] mr-1.5"></span>2 Caps</div>
-                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#7d5fff] mr-1.5"></span>3 Caps (Std)</div>
-                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#ffb45e] mr-1.5"></span>4+ Caps</div>
+                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#5c6b7f] mr-1.5"></span>Tracked Only</div>
+                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#ffb45e] mr-1.5"></span>Missed Protocol</div>
+                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#7d5fff] mr-1.5"></span>Partial Protocol</div>
+                <div className="flex items-center"><span className="w-2.5 h-2.5 rounded-full bg-[#0dcaf0] mr-1.5"></span>Followed Protocol</div>
                 <div className="flex items-center"><span className="w-4 h-0 border-t border-dashed border-[#20c997] mr-1.5"></span>Baseline</div>
             </div>
 
             <div className="flex gap-4 mb-5">
                 <div className="flex-1 bg-[var(--card)] border border-[#222748] rounded-2xl p-3 min-w-[100px]">
-                    <h3 className="text-sm text-[var(--muted)] font-medium m-0">Baseline</h3>
+                    <h3 className="text-sm text-[var(--muted)] font-medium m-0">Baseline Avg</h3>
                     <div className="text-2xl font-bold mt-1">{fmt(kpi.base)}</div>
                     <div className="text-xs text-[var(--muted)]">{kpi.baseLabel}</div>
                 </div>
                 <div className="flex-1 bg-[var(--card)] border border-[#222748] rounded-2xl p-3 min-w-[100px]">
-                    <h3 className="text-sm text-[var(--muted)] font-medium m-0">DeepCell Avg</h3>
+                    <h3 className="text-sm text-[var(--muted)] font-medium m-0">Protocol Avg</h3>
                     <div className="text-2xl font-bold mt-1">{fmt(kpi.test)}</div>
                 </div>
                 <div className="flex-1 bg-[var(--card)] border border-[#222748] rounded-2xl p-3 min-w-[100px]">
@@ -217,7 +218,7 @@ export default function Dashboard() {
                                 <tr>
                                     <th className="p-2 border-b border-[#2b3266] text-[var(--muted)] font-medium">Date</th>
                                     <th className="p-2 border-b border-[#2b3266] text-[var(--muted)] font-medium">Value</th>
-                                    <th className="p-2 border-b border-[#2b3266] text-[var(--muted)] font-medium">Dose</th>
+                                    <th className="p-2 border-b border-[#2b3266] text-[var(--muted)] font-medium">Adherence</th>
                                 </tr>
                             </thead>
                             <tbody>

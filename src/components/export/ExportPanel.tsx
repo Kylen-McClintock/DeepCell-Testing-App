@@ -16,7 +16,7 @@ export default function ExportPanel() {
     };
 
     const downloadCSV = () => {
-        const h = ["date", "tookDose", "doseAmount", "sleep_score", "sleep_quality", "speed_to_sleep", "groggy", "wake_ups", "total_sleep", "deep", "rem", "energy", "focus", "mood", "stress", "weight", "rhr", "hrv", "bp_sys", "bp_dia", "reaction_time", "notes"];
+        const h = ["date", "userProtocolId", "adherence", "sleep_score", "sleep_quality", "speed_to_sleep", "groggy", "wake_ups", "total_sleep", "deep", "rem", "energy", "focus", "mood", "stress", "weight", "rhr", "hrv", "bp_sys", "bp_dia", "reaction_time", "notes"];
         let csv = h.join(",") + "\n";
 
         Object.keys(state.daily).sort().forEach(d => {
@@ -27,8 +27,8 @@ export default function ExportPanel() {
 
             const row = [
                 d,
-                r.tookDose,
-                r.doseAmount || "",
+                r.userProtocolId || "",
+                JSON.stringify(r.adherence || {}).replace(/,/g, ";"),
                 w.score || "",
                 s.sleep || "",
                 s.latency || "",

@@ -25,11 +25,19 @@ export default function DailyCheckIn() {
         const existing = state.daily[date] || {};
         setLog({
             ...existing,
-            sliders: { ...existing.sliders }, // Ensure sliders object exists
+            adherence: { ...existing.adherence },
+            sliders: { ...existing.sliders },
             wearables: { ...existing.wearables },
             metrics: { ...existing.metrics }
         });
     }, [date, state.daily]);
+
+    const handleAdherenceChange = (modalityId: string, adhered: boolean) => {
+        setLog(prev => ({
+            ...prev,
+            adherence: { ...prev.adherence, [modalityId]: adhered }
+        }));
+    };
 
     const handleSliderChange = (key: keyof DailyMetrics, value: number) => {
         setLog(prev => ({
@@ -53,18 +61,17 @@ export default function DailyCheckIn() {
     };
 
     const save = () => {
-        // Ensure all required fields are present or default
         const sliders = { ...log.sliders } as DailyMetrics;
         Object.keys(dailyMetricsConfig).forEach(k => {
             if (sliders[k as keyof DailyMetrics] === undefined) {
-                sliders[k as keyof DailyMetrics] = 5; // Default value
+                sliders[k as keyof DailyMetrics] = 5;
             }
         });
 
         const finalLog: DailyLog = {
             date,
-            tookDose: log.tookDose || "no",
-            doseAmount: log.tookDose === "yes" ? (log.doseAmount || state.plan.defaultDose) : undefined,
+            userProtocolId: state.activeProtocol?.id,
+            adherence: log.adherence || {},
             sliders,
             wakeUps: log.wakeUps,
             wearables: log.wearables || {},
@@ -80,13 +87,12 @@ export default function DailyCheckIn() {
         if (e.target.files && e.target.files[0]) {
             const updates = await parseCSV(e.target.files[0]);
             let cnt = 0;
-            Object.entries(updates).forEach(([d, u]) => {
+            Object.entries(updates).forEach(([d, u]: [string, any]) => {
                 const existing = state.daily[d] || {};
-                // Merge deeply
                 const merged: DailyLog = {
                     date: d,
-                    tookDose: existing.tookDose || "no",
-                    doseAmount: existing.doseAmount,
+                    userProtocolId: existing.userProtocolId || state.activeProtocol?.id,
+                    adherence: existing.adherence || {},
                     sliders: existing.sliders || {},
                     wakeUps: existing.wakeUps,
                     wearables: { ...existing.wearables, ...u.wearables },
@@ -97,11 +103,6 @@ export default function DailyCheckIn() {
                 cnt++;
             });
             setWearableMsg(`Imported ${cnt} entries.`);
-            // Refresh current view if current date was updated
-            if (updates[date]) {
-                const existing = state.daily[date] || {}; // Refetch from state would be better but state update is async
-                // For now, just let the useEffect trigger re-render when state updates
-            }
         }
     };
 
@@ -136,21 +137,22 @@ export default function DailyCheckIn() {
         overlay.ontouchstart = handler as any;
     };
 
-    // Phase calculation
     let phase = "";
-    if (state.plan.startDate) {
-        const start = parseDate(state.plan.startDate);
+    if (state.activeProtocol && state.activeProtocol.startDate) {
+        const start = parseDate(state.activeProtocol.startDate);
         const cur = parseDate(date);
-        const isQuick = state.plan.mode === "quick";
+        const isQuick = state.activeProtocol.mode === "quick";
         if (isQuick) {
-            if (cur >= start) phase = "Test (On Product)"; else phase = "Pre-Start";
+            if (cur >= start) phase = "Active Protocol Phase"; else phase = "Pre-Start";
         } else {
-            const baseEnd = addDays(start, state.plan.baselineDays - 1);
+            const baseEnd = addDays(start, state.activeProtocol.baselineDays - 1);
             if (cur >= start && cur <= baseEnd) phase = "Baseline Phase";
-            else if (cur > baseEnd) phase = "Test (On Product)";
+            else if (cur > baseEnd) phase = "Active Protocol Phase";
             else phase = "Pre-Start";
         }
     }
+
+    const { activeProtocol } = state;
 
     return (
         <div className="card">
@@ -165,46 +167,46 @@ export default function DailyCheckIn() {
             </div>
             <div className="text-xs text-[var(--muted)] mb-4">Fill this out the morning after sleep.</div>
 
-            {/* Last Night's Sleep */}
+            {/* Protocol Adherence */}
+            {activeProtocol && activeProtocol.activeModalities.length > 0 && phase !== "Baseline Phase" && (
+                <div className="bg-[#0e1228] p-4 rounded-xl border border-[#2b3266] mb-4">
+                    <div className="flex items-center gap-2 mb-4 text-[var(--accent2)] font-semibold">
+                        <span>📋</span> Protocol Adherence
+                    </div>
+                    {activeProtocol.activeModalities.map(mod => {
+                        const isAdhered = log.adherence?.[mod.id];
+                        return (
+                            <div key={mod.id} className="mb-3">
+                                <label className="block text-white text-sm mb-1">{mod.name}</label>
+                                <div className="text-[10px] text-[var(--muted)] mb-1">{mod.defaultInstructions}</div>
+                                <div className="flex border border-[#2b3266] rounded-xl overflow-hidden mt-1">
+                                    <button
+                                        className={clsx("flex-1 p-2 text-sm font-semibold transition-all", isAdhered === false ? "bg-[#2b3266] text-white" : "bg-[#0e1228] text-[var(--muted)] hover:bg-[#1a1f3d]")}
+                                        onClick={() => handleAdherenceChange(mod.id, false)}
+                                    >
+                                        Missed
+                                    </button>
+                                    <button
+                                        className={clsx("flex-1 p-2 text-sm font-semibold transition-all border-l border-[#2b3266]", isAdhered === true ? "bg-[var(--accent2)] text-[#0b0e1a]" : "bg-[#0e1228] text-[var(--muted)] hover:bg-[#1a1f3d]")}
+                                        onClick={() => handleAdherenceChange(mod.id, true)}
+                                    >
+                                        Completed
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+
+            {/* Last Night's Sleep Metrics */}
             <div className="bg-[#0e1228] p-4 rounded-xl border border-[#2b3266] mb-4">
                 <div className="flex items-center gap-2 mb-4 text-[var(--accent2)] font-semibold">
-                    <span>🌙</span> Last Night's Sleep
-                </div>
-
-                <div className="flex gap-3 mb-4 items-start">
-                    <div className="flex-1">
-                        <label className="block text-[var(--muted)] text-sm mb-1">Took DeepCell last night?</label>
-                        <div className="flex border border-[#2b3266] rounded-xl overflow-hidden">
-                            <button
-                                className={clsx("flex-1 p-3 font-semibold transition-all", (log.tookDose || "no") === "no" ? "bg-[#2b3266] text-white" : "bg-[#0e1228] text-[var(--muted)]")}
-                                onClick={() => setLog(prev => ({ ...prev, tookDose: "no" }))}
-                            >
-                                Did Not Take
-                            </button>
-                            <button
-                                className={clsx("flex-1 p-3 font-semibold transition-all border-l border-[#2b3266]", (log.tookDose || "no") === "yes" ? "bg-[var(--accent2)] text-[#0b0e1a]" : "bg-[#0e1228] text-[var(--muted)]")}
-                                onClick={() => setLog(prev => ({ ...prev, tookDose: "yes", doseAmount: prev.doseAmount || state.plan.defaultDose }))}
-                            >
-                                Took DeepCell
-                            </button>
-                        </div>
-                    </div>
-                    {log.tookDose === "yes" && (
-                        <div className="w-[100px]">
-                            <label className="block text-[var(--muted)] text-sm mb-1">Capsules</label>
-                            <input
-                                type="number"
-                                className="input-field"
-                                step="1"
-                                value={log.doseAmount}
-                                onChange={(e) => setLog(prev => ({ ...prev, doseAmount: Number(e.target.value) }))}
-                            />
-                        </div>
-                    )}
+                    <span>🌙</span> Sleep Quality
                 </div>
 
                 <div className="mb-2 flex items-center gap-3">
-                    <label className="min-w-[140px] text-sm text-[var(--muted)]">Sleep Quality</label>
+                    <label className="min-w-[140px] text-sm text-[var(--muted)]">Core Score</label>
                     <input
                         type="range"
                         min="0" max="10" step="0.5"
@@ -342,11 +344,11 @@ export default function DailyCheckIn() {
             <div className="flex gap-3">
                 <button className="btn btn-primary" onClick={save}>Save Check-in</button>
                 <div className="flex-grow text-right gap-2 flex justify-end">
-                    <button className="btn" onClick={() => setDate(dateStr(addDays(date, -1)))}>←</button>
-                    <button className="btn" onClick={() => setDate(dateStr(addDays(date, 1)))}>→</button>
+                    <button className="btn bg-[#1b2144] hover:bg-[#222955]" onClick={() => setDate(dateStr(addDays(date, -1)))}>←</button>
+                    <button className="btn bg-[#1b2144] hover:bg-[#222955]" onClick={() => setDate(dateStr(addDays(date, 1)))}>→</button>
                 </div>
             </div>
-            <div className="text-center mt-3 text-sm text-[var(--accent2)]">Phase: {phase}</div>
+            <div className="text-center mt-3 text-sm text-[var(--accent2)]">Phase: {phase || "Not enrolled"}</div>
         </div>
     );
 }
